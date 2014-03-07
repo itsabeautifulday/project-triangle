@@ -1,2 +1,2 @@
-projecttriangle
-===============
+project-triangle
+================
