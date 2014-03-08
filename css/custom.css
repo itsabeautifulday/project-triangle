@@ -5,6 +5,22 @@ a:hover { color: #4B58A6; }
   max-width: none;
 }
 
+.btn-search {
+  background-color: #ffffff;
+  color: #555555;
+  border-color: #555555;
+}
+
+.btn-search:hover {
+  background-color: #f7f7f7;
+  border-color: #555555;
+  color: #555555;
+}
+
+#search_address {
+  display: none;
+}
+
 .filter-box { 
   height: 15px; 
   width: 15px;  
