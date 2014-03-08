@@ -47,11 +47,7 @@
     </div>
       <div class='row'>
         <div class='col-md-12'>
-
-            <p>
-              <input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text' />
-            </p>
-
+        	<input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text' />
         </div>
       </div>
       <div class="row">
@@ -78,8 +74,7 @@
       //<![CDATA[
         $(window).resize(function () {
           var h = $(window).height(),
-            offsetTop = 105; // Calculate the top offset
-        
+            offsetTop = 52; // This involves the navbar (51) and a 1 pxl gap between 
           $('#map_canvas').css('height', (h - offsetTop));
         }).resize();
         
