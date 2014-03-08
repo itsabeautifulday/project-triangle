@@ -39,17 +39,16 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class='active'><a href="index.html">Map</a></li>
+            <li><a href="index.html">Map</a></li>
             <li><a href="#">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
-      </div>
-    </div>
-      <div class='row'>
-        <div class='col-md-12'>
+		        <div class='col-md-12'>
         	<input class='form-control' id='search_address' placeholder='Enter an address or an intersection' type='text' />
         </div>
       </div>
+    </div>
+
       <div class="row">
         <div class='col-md-12'>
           <noscript>
@@ -74,7 +73,7 @@
       //<![CDATA[
         $(window).resize(function () {
           var h = $(window).height(),
-            offsetTop = 52; // This involves the navbar (51) and a 1 pxl gap between 
+            offsetTop = 0; // This involves the navbar (51) and a 1 pxl gap between 
           $('#map_canvas').css('height', (h - offsetTop));
         }).resize();
         
