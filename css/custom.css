@@ -32,7 +32,9 @@ body {
   -webkit-transition: width 0.35s ease;
   -moz-transition: width 0.35s ease;
   -o-transition: width 0.35s ease;
-  transition: width 0.35s ease; 
+  transition: width 0.35s ease;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 .menu-header {
@@ -128,6 +130,41 @@ canvas {-ms-touch-action: double-tap-zoom;}
   bottom: 40px;
 }
 
+#search_button {
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	right: 0px;
+}
+
+#menu_button {
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	left: 0px;
+}
+
+#top_bar {
+  z-index: 1000;
+  position: absolute;
+  border-width: 0 0 0px;
+  background-color: transparent;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+      border-radius: 0;
+}
+
+.title_bar {
+	position: absolute;
+	z-index: 1000;
+	top:0;
+	left:0;
+	right:0;
+	text-align: center;
+	color: #000000;
+}
 /*
 .filter-box { 
   height: 15px; 
