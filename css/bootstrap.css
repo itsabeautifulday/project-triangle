@@ -3767,7 +3767,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: right;
   padding: 9px 10px;
   margin-top: 8px;
-  margin-left: 15px; /* ADDED */
   margin-right: 15px;
   margin-bottom: 8px;
   background-color: #f8f8f8;

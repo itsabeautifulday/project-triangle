@@ -95,6 +95,15 @@ var MapsLib = {
 
   doSearch: function(location) {
     MapsLib.clearSearch();
+    var myLatlng = new google.maps.LatLng(49.283205, -123.120251);
+
+    MapsLib.addrMarker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      icon: MapsLib.currLocationIcon,
+      title:"You're here"
+    });  
+    
     var address = $("#search_address").val();
     MapsLib.searchRadius = $("#search_radius").val();
 
