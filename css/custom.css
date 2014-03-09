@@ -6,6 +6,39 @@ a:hover { color: #4B58A6; }
   position: absolute;
 }
 
+#details {
+  display: none;
+}
+
+#details-content {
+  padding-top: 60px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#share-page {
+  padding-top: 120px;
+  text-align: center;
+  display: none;
+}
+
+.photo-slide {
+  padding-top: 30px;
+}
+
+.avatar {
+  width: 60%;
+}
+
+.wordcloud-main {
+  font-size: 18px;
+
+}
+
+.wordcloud-secondary {
+  color: #7e5c8f;
+}
+
 .btn-search {
   background-color: #ffffff;
   color: #555555;
