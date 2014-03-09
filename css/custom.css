@@ -4,10 +4,11 @@ a:hover { color: #4B58A6; }
 #map_canvas img {
   max-width: none;
   position: absolute;
+  width: 100vw;
 }
 
 #details {
-/*  display: none;*/
+  display: none;
 }
 
 #details-content {
@@ -58,7 +59,7 @@ a:hover { color: #4B58A6; }
 #event_list {
   position: absolute;
   z-index: 10000;
-  bottom: -20px;
+  bottom: 0px;
   width: 100vw;
 }
 
