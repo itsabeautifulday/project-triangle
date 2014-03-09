@@ -165,6 +165,12 @@ canvas {-ms-touch-action: double-tap-zoom;}
 	text-align: center;
 	color: #000000;
 }
+
+#search_bar {
+	position: absolute;
+	top: 20px;
+}
+
 /*
 .filter-box { 
   height: 15px; 
