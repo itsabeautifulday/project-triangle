@@ -33,8 +33,6 @@ body {
   -moz-transition: width 0.35s ease;
   -o-transition: width 0.35s ease;
   transition: width 0.35s ease;
-  padding-left:10px;
-  padding-right:10px;
 }
 
 .menu-header {
@@ -46,8 +44,10 @@ body {
 
 .collapse-inner {
   position: relative;        
-  width: 150px;
+  width: 300px;
   height: 100%;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 #map_canvas img {
@@ -153,7 +153,7 @@ canvas {-ms-touch-action: double-tap-zoom;}
   margin-right: auto;
   left: 0;
   right: 0;
-      border-radius: 0;
+  border-radius: 0;
 }
 
 .title_bar {
