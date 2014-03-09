@@ -75,28 +75,23 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                      What's Happening?
-                    </a>
+                    <div data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                      <div class="row">
+                        <div class="col-xs-6">
+                          <button class="btn btn-success">Discover</button>
+                        </div>
+                        <div class="col-xs-6">
+                          <img src="images/blue-dot.png"> <span>= Your Location</span>
+                        </div>
+                      </div>
+                    </div>
                   </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
-                  <div>
-                    <div>
-                      <h5>Sort by:</h5>
-                      <select class="form-control">
-                        <option value="one">Closest</option>
-                        <option value="two">Furthest</option>
-                        <option value="three">Size (Decreasing)</option>
-                        <option value="four">Size (Increasing)</option>
-                      </select>
-                    </div>
-                  </div>
+
                   <ul class="list-group">
-                    <li class="list-group-item">Vancouver Auto Show</li>
-                    <li class="list-group-item">Jazz Festival</li>
-                    <li class="list-group-item">Magic Show</li>
-                    <li class="list-group-item">Car Accident</li>
+                    <li class="list-group-item">Most Popular Events</li>
+                    <li class="list-group-item">Nearest Events</li>
                   </ul>
                 </div>
               </div>
@@ -127,18 +122,6 @@
         $( "#search" ).click(function() {
           $("#search_address").slideToggle();
         });
-
-
-        // $("#enter-details").click(function(){
-        //   //show the details page, hide the maps page
-        //   $("#home").hide();
-        //   $("#details").fadeIn();
-        // })
-
-        // $("#back").click(function(){
-        //   $("#details").hide();
-        //   $("#home").fadeIn();          
-        // })
 
         });
 
