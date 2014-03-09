@@ -40,6 +40,7 @@ var MapsLib = {
   searchRadius:       805,            //in meters ~ 1/2 mile
   defaultZoom:        13,             //zoom level when map is loaded (bigger is more zoomed in)
   addrMarkerImage:    'images/blue-pushpin.png',
+  currLocationIcon:   'images/blue-dot.png',
   currentPinpoint:    null,
 
   initialize: function() {
@@ -63,7 +64,7 @@ var MapsLib = {
     });
 
 
-    MapsLib.searchrecords = null;
+    MapsLib.searchrecords = null;   
 
     //reset filters
     $("#search_address").val(MapsLib.convertToPlainString($.address.parameter('address')));
@@ -72,6 +73,7 @@ var MapsLib = {
     else $("#search_radius").val(MapsLib.searchRadius);
     $(":checkbox").prop("checked", "checked");
     $("#result_box").hide();
+
     
     //-----custom initializers-------
     
@@ -79,6 +81,15 @@ var MapsLib = {
 
     //run the default search
     MapsLib.doSearch();
+
+    var myLatlng = new google.maps.LatLng(49.283205, -123.120251);
+
+    MapsLib.addrMarker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      icon: MapsLib.currLocationIcon,
+      title:"You're here"
+    });     
   },
 
   doSearch: function(location) {
@@ -111,7 +122,7 @@ var MapsLib = {
             icon: MapsLib.addrMarkerImage,
             animation: google.maps.Animation.DROP,
             title:address
-          });
+          });          
 
           whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
 
