@@ -62,6 +62,7 @@ var MapsLib = {
         map.setCenter(MapsLib.map_centroid);
     });
 
+
     MapsLib.searchrecords = null;
 
     //reset filters
