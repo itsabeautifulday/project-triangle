@@ -74,6 +74,13 @@ a:hover { color: #4B58A6; }
   display: none;
 }
 
+#event_list {
+  position: absolute;
+  z-index: 10000;
+  bottom: -20px;
+  width: 100vw;
+}
+
 .filter-box { 
   height: 15px; 
   width: 15px;  
