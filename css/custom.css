@@ -69,8 +69,6 @@ body {
 
 #details-content {
   padding-top: 60px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 #share-page {
