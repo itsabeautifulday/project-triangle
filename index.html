@@ -25,12 +25,20 @@
           Main Menu
         </div>
         <ul class="nav nav-tabs nav-stacked">
-          <li><a>First button</a></li>
-          <li><a>Second button</a></li>
-          <li><a>Third button</a></li>
-          <li><a>Four button</a></li>
-          <li><a>Fifth button</a></li>
-          <li><a>Sixth button</a></li>
+          <li>Default Location:</li>
+          <li>                      
+		    <select class="form-control">
+              <option value="one">Downtown Vancouver</option>
+              <option value="two">Coquitlam</option>
+              <option value="three">Burnaby</option>
+              <option value="four">Surrey</option>
+            </select></li>
+          <li>Connect with:</li>
+          <li><a>Facebook</a></li>
+          <li><a>Twitter</a></li>
+          <li><a>Instagram</a></li>
+		  <li><a>Foursquare</a></li>
+		  <li><a>Google+</a></li>
         </ul>
       </div>
     </div>
@@ -71,6 +79,10 @@
       <div id="content" class="row">
         <div class='col-md-12'>
           <div id="map_canvas"></div>
+			<div id="current_location">
+			  <button class="btn btn-default navbar-btn pull-right">
+              <span class="fa fa-location-arrow" id="curr_loc"></span></button>
+			</div>
             <div id="event_list">
               <div class="panel panel-default">
                 <div class="panel-heading">
@@ -162,7 +174,7 @@
             MapsLib.doSearch();
           });
           
-          $('#find_me').click(function(){
+          $('#current_location').click(function(){
             MapsLib.findMe(); 
             return false;
           });

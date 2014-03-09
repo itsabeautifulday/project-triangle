@@ -122,6 +122,12 @@ canvas {-ms-touch-action: double-tap-zoom;}
   width: 100vw;
 }
 
+#current_location {
+  position: absolute;
+  z-index: 10000;
+  bottom: 40px;
+}
+
 /*
 .filter-box { 
   height: 15px; 
