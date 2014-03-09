@@ -102,7 +102,8 @@ var MapsLib = {
   },
 
   findMe: function() {
-	map.setCenter(MapsLib.map_centroid);
+	map.panTo(MapsLib.map_centroid);
+	map.setZoom(MapsLib.defaultZoom);
   },
   
   locationJump: function(location) {
@@ -119,7 +120,8 @@ var MapsLib = {
 	if (location == "loc_surrey") {
 		loc_coord = MapsLib.surrey_coord;
 	}
-	map.setCenter(loc_coord);
+	map.panTo(loc_coord);
+	map.setZoom(MapsLib.defaultZoom);
   },
 
   query: function(selectColumns, whereClause, callback) {
