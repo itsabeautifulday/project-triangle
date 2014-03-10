@@ -70,11 +70,16 @@
         </div>
 
 		  <div id="search_button">
-            <button class="btn btn-default navbar-btn pull-left">
+          <button class="btn btn-default navbar-btn pull-left">
               <span class="glyphicon glyphicon-search" id="search"></span>
-			</button>
+			    </button>
+      </div>
+      </div>
+
+          <div class='col-md-12'>
+            <input class='form-control' id='search-bar' placeholder='Search for event keywords, location' type='text' />
           </div>
-        </div>
+
       </div> 
       
       <div id="content" class="row">
@@ -131,7 +136,7 @@
         
         $(document).ready(function() {
         $( "#search" ).click(function() {
-          $("#search_address").slideToggle();
+          $("#search-bar").slideToggle();
         });
 
         });
@@ -174,13 +179,22 @@
           });
 
           
-//           $(":text").keydown(function(e){
-//               var key =  e.keyCode ? e.keyCode : e.which;
-//               if(key == 13) {
-//                   $('#search').click();
-//                   return false;
-//               }
-//           });
+          $(":text").keydown(function(e){
+              var key =  e.keyCode ? e.keyCode : e.which;
+              if(key == 13) {
+
+                if($("#search-bar").val() != ""){
+                  MapsLib.search();
+                  return false;
+                }
+                else {
+                  MapsLib.plotMap();
+                  return false;
+                }
+              }
+          });
+
+
           $('#all').click(function(){
               MapsLib.plotMap();
           });

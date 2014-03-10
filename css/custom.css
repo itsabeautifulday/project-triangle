@@ -68,9 +68,6 @@ body {
   background-color: rgba(255,255,255,0.95);*/
 }
 
-#discover {
-  background-color: transparent;
-}
 
 #details-content {
   padding-top: 60px;
@@ -112,9 +109,11 @@ body {
   color: #555555;
 }
 
-#search_address {
+#search-bar {
+  margin-top: 60px;
   display: none;
 }
+
 canvas {-ms-touch-action: double-tap-zoom;}
 
 #event_list {

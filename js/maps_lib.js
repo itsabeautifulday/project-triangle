@@ -38,7 +38,7 @@ var MapsLib = {
   recordNamePlural:   "results",
 
   searchRadius:       805,            //in meters ~ 1/2 mile
-  defaultZoom:        14,             //zoom level when map is loaded (bigger is more zoomed in)
+  defaultZoom:        13,             //zoom level when map is loaded (bigger is more zoomed in)
   currLocationIcon:   'images/curr-loc.png',
   eventMarkerIcon:    'images/red-dot.png',
   currentPinpoint:    null,
@@ -225,15 +225,49 @@ var MapsLib = {
     });
     markers.push(marker);
 
-    var coord2 = new google.maps.LatLng(49.283958,-123.106306);
+    var coord3 = new google.maps.LatLng(49.283958,-123.106306);
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       map: map,
-      position: coord2,
+      position: coord3,
       icon: 'images/sort/3.png'
     });
     google.maps.event.addListener(marker, 'click', function(event) {
-      infoWindow.setPosition(coord2);
+      infoWindow.setPosition(coord3);
+      infoWindow.setContent("VancouverAutoShow" + '<br>Number of people: ' + "122" + '<br>Distance: ' + "650m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='VancouverAutoShow.html'>details</a></button> ");
+      infoWindow.open(map);
+    });  
+    markers.push(marker);
+
+    var coord4 = new google.maps.LatLng(49.276020,-123.133777);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord4,
+      icon: 'images/sort/4.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord4);
+      infoWindow.setContent("CarAccident" + '<br>Number of people: ' + "20" + '<br>Distance: ' + "800m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='CarAccident.html'>details</a></button> ");
+      infoWindow.open(map);
+    });  
+    markers.push(marker);     
+  },
+
+  search: function(){
+    MapsLib.setAllMap(null);
+
+    var coord = new google.maps.LatLng(49.283958,-123.106306);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord,
+      icon: 'images/blue-dot.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord);
       infoWindow.setContent("VancouverAutoShow" + '<br>Number of people: ' + "122" + '<br>Distance: ' + "650m" 
         + '<br>' + "<button class='btn btn-default btn-xs'><a href='VancouverAutoShow.html'>details</a></button> ");
       infoWindow.open(map);
@@ -245,7 +279,7 @@ var MapsLib = {
     var marker = new google.maps.Marker({
       map: map,
       position: coord2,
-      icon: 'images/sort/4.png'
+      icon: 'images/blue-dot.png'
     });
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coord2);
