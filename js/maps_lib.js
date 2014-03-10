@@ -38,7 +38,7 @@ var MapsLib = {
   recordNamePlural:   "results",
 
   searchRadius:       805,            //in meters ~ 1/2 mile
-  defaultZoom:        14,             //zoom level when map is loaded (bigger is more zoomed in)
+  defaultZoom:        13,             //zoom level when map is loaded (bigger is more zoomed in)
   currLocationIcon:   'images/curr-loc.png',
   eventMarkerIcon:    'images/red-dot.png',
   currentPinpoint:    null,
@@ -66,7 +66,12 @@ var MapsLib = {
     google.maps.event.addDomListener(window, 'resize', function() {
         map.setCenter(MapsLib.map_centroid);
     });
-    
+	
+	google.maps.event.addListener(map, 'click', function() {
+      MapsLib.hideMenus();
+      MapsLib.clearSelectedEvents();
+	});
+	
     //plot points on map
     MapsLib.plotMap(map);
 
@@ -81,7 +86,7 @@ var MapsLib = {
   },
 
   plotMap: function(map) {
-    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates FROM " + MapsLib.fusionTableId;
+    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, id FROM " + MapsLib.fusionTableId;
     query = encodeURIComponent(query);
     var gvizQuery = new google.visualization.Query(
       'http://www.google.com/fusiontables/gvizdata?tq=' + query);
@@ -98,12 +103,13 @@ var MapsLib = {
         var lat = splitCoordinates[0];
         var lng = splitCoordinates[1];
         var coordinate = new google.maps.LatLng(lat, lng);
-        MapsLib.createEventMarker(eventname, size, distance, coordinate);
+		var id = response.getDataTable().getValue(i, 4);
+        MapsLib.createEventMarker(eventname, size, distance, coordinate, id);
       }
     });	
   },
   
-  createEventMarker: function(eventname, size, distance, coordinate) {
+  createEventMarker: function(eventname, size, distance, coordinate, id) {
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       map: map,
@@ -111,9 +117,13 @@ var MapsLib = {
       icon: new google.maps.MarkerImage(MapsLib.eventMarkerIcon)
     });
     google.maps.event.addListener(marker, 'click', function(event) {
-      infoWindow.setPosition(coordinate);
-      infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance);
-      infoWindow.open(map);
+      infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance + '<br><a href="details.html">' +
+      'More...</a>');
+      //infoWindow.open(map,marker);
+	  
+	  $("#collapseOne").collapse('show');
+	  MapsLib.clearSelectedEvents();
+	  $("#" + id).css("backgroundColor", "LightBlue");
     });
   },
 
@@ -138,6 +148,19 @@ var MapsLib = {
 	}
 	map.panTo(loc_coord);
 	map.setZoom(MapsLib.defaultZoom);
+  },
+  
+  hideMenus: function() {
+    $("#collapseLoc").collapse('hide');
+    $("#collapseOne").collapse('hide');
+    $("#menu").collapse('hide');
+  },
+  
+  clearSelectedEvents: function() {
+    $("#autoshow").css("backgroundColor", "white");
+    $("#jazzfest").css("backgroundColor", "white");
+    $("#magicshow").css("backgroundColor", "white");
+    $("#caraccident").css("backgroundColor", "white");
   },
 
   // maintains map centerpoint for responsive design

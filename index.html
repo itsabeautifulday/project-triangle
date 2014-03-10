@@ -19,7 +19,7 @@
 
   <!-- the home page with the main map view -->
   <div class="frame">
-    <div id="menu" class="menu collapse width">
+    <div id="menu" class="menu collapse in width">
       <div class="collapse-inner">
         <div class="menu-header"> 
           Main Menu
@@ -59,7 +59,7 @@
               <span class="fa fa-caret-down fa-lg"></span>
              </a>
           </h4>
-          <div id="collapseLoc" class="panel-collapse collapse">
+          <div id="collapseLoc" class="panel-collapse collapse in">
             <ul class="list-group">
               <li class="list-group-item" id="loc_dt"><a>Downtown Vancouver</a></li>
               <li class="list-group-item" id="loc_coquitlam"><a>Coquitlam</a></li>
@@ -93,7 +93,7 @@
                     </a>
                   </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse">
+                <div id="collapseOne" class="panel-collapse collapse in">
                   <div>
                     <h5>Sort by:</h5>
                     <select class="form-control">
@@ -104,10 +104,10 @@
                     </select>
                   </div>
                   <ul class="list-group">
-                    <li class="list-group-item">Vancouver Auto Show</li>
-                    <li class="list-group-item">Jazz Festival</li>
-                    <li class="list-group-item">Magic Show</li>
-                    <li class="list-group-item">Car Accident</li>
+                    <li class="list-group-item" id="autoshow"><a href="autoshow.html">Vancouver Auto Show</a></li>
+                    <li class="list-group-item" id="jazzfest"><a href="jazzfest.html">Jazz Festival</a></li>
+                    <li class="list-group-item" id="magicshow"><a href="magicshow.html">Magic Show</a></li>
+                    <li class="list-group-item" id="caraccident"><a href="caraccident.html">Car Accident</a></li>
                   </ul>
                 </div>
               </div>
@@ -135,6 +135,10 @@
           $('#map_canvas').css('height', (h - offsetTop));
         }).resize();
         
+		// Hide all menus
+        MapsLib.hideMenus();
+		
+		
         $(document).ready(function() {
         $( "#search" ).click(function() {
           $("#search_address").slideToggle();

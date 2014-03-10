@@ -171,6 +171,26 @@ canvas {-ms-touch-action: double-tap-zoom;}
 	top: 20px;
 }
 
+#back_button {
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	left: 0px;
+}
+
+#share_button {
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	right: 0px;
+}
+
+.event_photos {
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 /*
 .filter-box { 
   height: 15px; 
