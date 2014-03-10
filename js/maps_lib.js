@@ -38,15 +38,18 @@ var MapsLib = {
   recordNamePlural:   "results",
 
   searchRadius:       805,            //in meters ~ 1/2 mile
-  defaultZoom:        13,             //zoom level when map is loaded (bigger is more zoomed in)
-  addrMarkerImage:    'images/blue-pushpin.png',
-  currLocationIcon:   'images/blue-dot.png',
+  defaultZoom:        14,             //zoom level when map is loaded (bigger is more zoomed in)
+  currLocationIcon:   'images/curr-loc.png',
+  eventMarkerIcon:    'images/red-dot.png',
   currentPinpoint:    null,
+  
+  // coordinates for location jumper
+  vancouver_coord:    new google.maps.LatLng(49.283205, -123.120251),
+  burnaby_coord:      new google.maps.LatLng(49.227942, -123.001948),
+  coquitlam_coord:    new google.maps.LatLng(49.278018, -122.800855),
+  surrey_coord:       new google.maps.LatLng(49.186445, -122.823494),
 
   initialize: function() {
-    $( "#result_count" ).html("");
-
-    geocoder = new google.maps.Geocoder();
     var myOptions = {
       zoom: MapsLib.defaultZoom,
       center: MapsLib.map_centroid,
@@ -63,28 +66,12 @@ var MapsLib = {
     google.maps.event.addDomListener(window, 'resize', function() {
         map.setCenter(MapsLib.map_centroid);
     });
-
-
-    MapsLib.searchrecords = null;   
-
-    //reset filters
-    $("#search_address").val(MapsLib.convertToPlainString($.address.parameter('address')));
-    var loadRadius = MapsLib.convertToPlainString($.address.parameter('radius'));
-    if (loadRadius != "") $("#search_radius").val(loadRadius);
-    else $("#search_radius").val(MapsLib.searchRadius);
-    $(":checkbox").prop("checked", "checked");
-    $("#result_box").hide();
-
     
-    //-----custom initializers-------
-    
-    //-----end of custom initializers-------
+    //plot points on map
+    MapsLib.plotMap(map);
 
-    //run the default search
-    MapsLib.doSearch();
-
+	// plot current location on map
     var myLatlng = new google.maps.LatLng(49.283205, -123.120251);
-
     MapsLib.addrMarker = new google.maps.Marker({
       position: myLatlng,
       map: map,
@@ -93,203 +80,69 @@ var MapsLib = {
     });     
   },
 
-  doSearch: function(location) {
-    MapsLib.clearSearch();
-    var myLatlng = new google.maps.LatLng(49.283205, -123.120251);
-
-    MapsLib.addrMarker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      icon: MapsLib.currLocationIcon,
-      title:"You're here"
-    });  
+  plotMap: function(map) {
+    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates FROM " + MapsLib.fusionTableId;
+    query = encodeURIComponent(query);
+    var gvizQuery = new google.visualization.Query(
+      'http://www.google.com/fusiontables/gvizdata?tq=' + query);
     
-    var address = $("#search_address").val();
-    MapsLib.searchRadius = $("#search_radius").val();
-
-    var whereClause = MapsLib.locationColumn + " not equal to ''";
-
-    //-----custom filters-------
-
-    //-------end of custom filters--------
-
-    if (address != "") {
-      if (address.toLowerCase().indexOf(MapsLib.locationScope) == -1)
-        address = address + " " + MapsLib.locationScope;
-
-      geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          MapsLib.currentPinpoint = results[0].geometry.location;
-
-          $.address.parameter('address', encodeURIComponent(address));
-          $.address.parameter('radius', encodeURIComponent(MapsLib.searchRadius));
-          map.setCenter(MapsLib.currentPinpoint);
-          map.setZoom(14);
-
-          MapsLib.addrMarker = new google.maps.Marker({
-            position: MapsLib.currentPinpoint,
-            map: map,
-            icon: MapsLib.addrMarkerImage,
-            animation: google.maps.Animation.DROP,
-            title:address
-          });          
-
-          whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
-
-          MapsLib.drawSearchRadiusCircle(MapsLib.currentPinpoint);
-          MapsLib.submitSearch(whereClause, map, MapsLib.currentPinpoint);
-        }
-        else {
-          alert("We could not find your address: " + status);
-        }
-      });
-    }
-    else { //search without geocoding callback
-      MapsLib.submitSearch(whereClause, map);
-    }
+    gvizQuery.send(function(response) {
+      var numRows = response.getDataTable().getNumberOfRows();
+      // For each row in the table, create a marker
+      for (var i = 0; i < numRows; i++) {
+        var eventname = response.getDataTable().getValue(i, 0);
+        var size = response.getDataTable().getValue(i, 1);
+        var distance = response.getDataTable().getValue(i, 2);
+        var stringCoordinates = response.getDataTable().getValue(i, 3);
+        var splitCoordinates = stringCoordinates.split(',');
+        var lat = splitCoordinates[0];
+        var lng = splitCoordinates[1];
+        var coordinate = new google.maps.LatLng(lat, lng);
+        MapsLib.createEventMarker(eventname, size, distance, coordinate);
+      }
+    });	
   },
-
-  submitSearch: function(whereClause, map, location) {
-    //get using all filters
-    //NOTE: styleId and templateId are recently added attributes to load custom marker styles and info windows
-    //you can find your Ids inside the link generated by the 'Publish' option in Fusion Tables
-    //for more details, see https://developers.google.com/fusiontables/docs/v1/using#WorkingStyles
-
-    MapsLib.searchrecords = new google.maps.FusionTablesLayer({
-      query: {
-        from:   MapsLib.fusionTableId,
-        select: MapsLib.locationColumn,
-        where:  whereClause
-      },
-      styleId: 2,
-      templateId: 2
+  
+  createEventMarker: function(eventname, size, distance, coordinate) {
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coordinate,
+      icon: new google.maps.MarkerImage(MapsLib.eventMarkerIcon)
     });
-    MapsLib.searchrecords.setMap(map);
-    MapsLib.getCount(whereClause);
-  },
-
-  clearSearch: function() {
-    if (MapsLib.searchrecords != null)
-      MapsLib.searchrecords.setMap(null);
-    if (MapsLib.addrMarker != null)
-      MapsLib.addrMarker.setMap(null);
-    if (MapsLib.searchRadiusCircle != null)
-      MapsLib.searchRadiusCircle.setMap(null);
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coordinate);
+      infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='"+eventname+".html'>details</a></button> ");
+      infoWindow.open(map);
+    });
   },
 
   findMe: function() {
-    // Try W3C Geolocation (Preferred)
-    var foundLocation;
-
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        foundLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        MapsLib.addrFromLatLng(foundLocation);
-      }, null);
-    }
-    else {
-      alert("Sorry, we could not find your location.");
-    }
+	map.panTo(MapsLib.map_centroid);
+	map.setZoom(MapsLib.defaultZoom);
   },
-
-  addrFromLatLng: function(latLngPoint) {
-    geocoder.geocode({'latLng': latLngPoint}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          $('#search_address').val(results[1].formatted_address);
-          $('.hint').focus();
-          MapsLib.doSearch();
-        }
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-  },
-
-  drawSearchRadiusCircle: function(point) {
-      var circleOptions = {
-        strokeColor: "#4b58a6",
-        strokeOpacity: 0.3,
-        strokeWeight: 1,
-        fillColor: "#4b58a6",
-        fillOpacity: 0.05,
-        map: map,
-        center: point,
-        clickable: false,
-        zIndex: -1,
-        radius: parseInt(MapsLib.searchRadius)
-      };
-      MapsLib.searchRadiusCircle = new google.maps.Circle(circleOptions);
-  },
-
-  query: function(selectColumns, whereClause, callback) {
-    var queryStr = [];
-    queryStr.push("SELECT " + selectColumns);
-    queryStr.push(" FROM " + MapsLib.fusionTableId);
-    queryStr.push(" WHERE " + whereClause);
-
-    var sql = encodeURIComponent(queryStr.join(" "));
-    $.ajax({url: "https://www.googleapis.com/fusiontables/v1/query?sql="+sql+"&callback="+callback+"&key="+MapsLib.googleApiKey, dataType: "jsonp"});
-  },
-
-  handleError: function(json) {
-    if (json["error"] != undefined) {
-      var error = json["error"]["errors"]
-      console.log("Error in Fusion Table call!");
-      for (var row in error) {
-        console.log(" Domain: " + error[row]["domain"]);
-        console.log(" Reason: " + error[row]["reason"]);
-        console.log(" Message: " + error[row]["message"]);
-      }
-    }
-  },
-
-  getCount: function(whereClause) {
-    var selectColumns = "Count()";
-    MapsLib.query(selectColumns, whereClause,"MapsLib.displaySearchCount");
-  },
-
-  displaySearchCount: function(json) {
-    MapsLib.handleError(json);
-    var numRows = 0;
-    if (json["rows"] != null)
-      numRows = json["rows"][0];
-
-    var name = MapsLib.recordNamePlural;
-    if (numRows == 1)
-    name = MapsLib.recordName;
-    $( "#result_box" ).fadeOut(function() {
-        $( "#result_count" ).html(MapsLib.addCommas(numRows) + " " + name + " found");
-      });
-    $( "#result_box" ).fadeIn();
-  },
-
-  addCommas: function(nStr) {
-    nStr += '';
-    x = nStr.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2;
+  
+  locationJump: function(location) {
+    var loc_coord = null;
+	if (location == "loc_dt") {
+		loc_coord = MapsLib.vancouver_coord;
+	} 
+	if (location =="loc_burnaby") {
+		loc_coord = MapsLib.burnaby_coord;
+	}
+	if (location == "loc_coquitlam") {
+		loc_coord = MapsLib.coquitlam_coord;
+	}
+	if (location == "loc_surrey") {
+		loc_coord = MapsLib.surrey_coord;
+	}
+	map.panTo(loc_coord);
+	map.setZoom(MapsLib.defaultZoom);
   },
 
   // maintains map centerpoint for responsive design
   calculateCenter: function() {
     center = map.getCenter();
-  },
-
-  //converts a slug or query string in to readable text
-  convertToPlainString: function(text) {
-    if (text == undefined) return '';
-  	return decodeURIComponent(text);
   }
-  
-  //-----custom functions-------
-  // NOTE: if you add custom functions, make sure to append each one with a comma, except for the last one.
-  // This also applies to the convertToPlainString function above
-  
-  //-----end of custom functions-------
 }
