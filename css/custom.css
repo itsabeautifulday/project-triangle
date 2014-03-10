@@ -191,6 +191,10 @@ canvas {-ms-touch-action: double-tap-zoom;}
   margin-right: 15px;
 }
 
+#results {
+	display: none;
+}
+
 /*
 .filter-box { 
   height: 15px; 
