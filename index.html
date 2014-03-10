@@ -19,7 +19,7 @@
 
   <!-- the home page with the main map view -->
   <div class="frame">
-    <div id="menu" class="menu collapse width">
+    <div id="menu" class="menu collapse in width">
       <div class="collapse-inner">
         <div class="menu-header"> 
           Main Menu
@@ -59,7 +59,7 @@
               <span class="fa fa-caret-down fa-lg"></span>
              </a>
           </h4>
-          <div id="collapseLoc" class="panel-collapse collapse">
+          <div id="collapseLoc" class="panel-collapse collapse in">
             <ul class="list-group">
               <li class="list-group-item" id="loc_dt"><a>Downtown Vancouver</a></li>
               <li class="list-group-item" id="loc_coquitlam"><a>Coquitlam</a></li>
@@ -133,6 +133,9 @@
             offsetTop = 0; // This involves the navbar (51) and a 1 pxl gap between 
           $('#map_canvas').css('height', (h - offsetTop));
         }).resize();
+
+        //hides the menus
+        MapsLib.hideMenus();
         
         $(document).ready(function() {
         $( "#search" ).click(function() {

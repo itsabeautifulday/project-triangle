@@ -66,6 +66,10 @@ var MapsLib = {
     google.maps.event.addDomListener(window, 'resize', function() {
         map.setCenter(MapsLib.map_centroid);
     });
+
+    google.maps.event.addListener(map, 'click', function() {
+        MapsLib.hideMenus();
+    });    
     
     //plot points on map
     MapsLib.plotMap(map);
@@ -313,6 +317,11 @@ var MapsLib = {
 	map.setZoom(MapsLib.defaultZoom);
   },
 
+  hideMenus: function() {
+    $("#collapseLoc").collapse('hide');
+    $("#collapseOne").collapse('hide');
+    $("#menu").collapse('hide');
+  },
   // maintains map centerpoint for responsive design
   calculateCenter: function() {
     center = map.getCenter();
