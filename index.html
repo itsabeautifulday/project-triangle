@@ -181,13 +181,16 @@
 //                   return false;
 //               }
 //           });
+          $('#all').click(function(){
+              MapsLib.plotMap();
+          });
 
           $('#trending').click(function(){
-
+              MapsLib.findTrending();
           });
 
           $("#nearest").click(function(){
-
+              MapsLib.findNearest();
           });
 
 

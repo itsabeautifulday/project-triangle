@@ -57,7 +57,7 @@ var MapsLib = {
 	  disableDefaultUI: true
     };
     map = new google.maps.Map($("#map_canvas")[0],myOptions);
-
+    markers = [];
     // maintains map centerpoint for responsive design
     google.maps.event.addDomListener(map, 'idle', function() {
         MapsLib.calculateCenter();
@@ -80,7 +80,15 @@ var MapsLib = {
     });     
   },
 
+  setAllMap: function(map){
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  },
+
   plotMap: function(map) {
+    MapsLib.setAllMap(null);
+
     var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates FROM " + MapsLib.fusionTableId;
     query = encodeURIComponent(query);
     var gvizQuery = new google.visualization.Query(
@@ -110,12 +118,142 @@ var MapsLib = {
       position: coordinate,
       icon: new google.maps.MarkerImage(MapsLib.eventMarkerIcon)
     });
+
+    markers.push(marker);
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coordinate);
       infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance 
         + '<br>' + "<button class='btn btn-default btn-xs'><a href='"+eventname+".html'>details</a></button> ");
       infoWindow.open(map);
     });
+  },
+
+  findTrending: function(){
+    MapsLib.setAllMap(null);
+
+    var coord1 = new google.maps.LatLng(49.286035,-123.126975);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord1,
+      icon: 'images/sort/3.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord1);
+      infoWindow.setContent("MagicShow" + '<br>Number of people: ' + "23" + '<br>Distance: ' + "200m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='MagicShow.html'>details</a></button> ");
+      infoWindow.open(map);
+    });
+    markers.push(marker);
+
+    var coord2 = new google.maps.LatLng(49.289177,-123.116032);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord2,
+      icon: 'images/sort/1.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord2);
+      infoWindow.setContent("JazzFestival" + '<br>Number of people: ' + "134" + '<br>Distance: ' + "500m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='JazzFestival.html'>details</a></button> ");
+      infoWindow.open(map);
+    });
+    markers.push(marker);
+
+    var coord2 = new google.maps.LatLng(49.283958,-123.106306);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord2,
+      icon: 'images/sort/2.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord2);
+      infoWindow.setContent("VancouverAutoShow" + '<br>Number of people: ' + "122" + '<br>Distance: ' + "650m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='VancouverAutoShow.html'>details</a></button> ");
+      infoWindow.open(map);
+    });  
+    markers.push(marker);
+
+    var coord2 = new google.maps.LatLng(49.276020,-123.133777);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord2,
+      icon: 'images/sort/4.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord2);
+      infoWindow.setContent("CarAccident" + '<br>Number of people: ' + "20" + '<br>Distance: ' + "800m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='CarAccident.html'>details</a></button> ");
+      infoWindow.open(map);
+    }); 
+    markers.push(marker);      
+  },  
+
+  findNearest: function(){
+    MapsLib.setAllMap(null);
+
+    var coord1 = new google.maps.LatLng(49.286035,-123.126975);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord1,
+      icon: 'images/sort/1.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord1);
+      infoWindow.setContent("MagicShow" + '<br>Number of people: ' + "23" + '<br>Distance: ' + "200m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='MagicShow.html'>details</a></button> ");
+      infoWindow.open(map);
+    });
+    markers.push(marker);
+
+    var coord2 = new google.maps.LatLng(49.289177,-123.116032);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord2,
+      icon: 'images/sort/2.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord2);
+      infoWindow.setContent("JazzFestival" + '<br>Number of people: ' + "134" + '<br>Distance: ' + "500m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='JazzFestival.html'>details</a></button> ");
+      infoWindow.open(map);
+    });
+    markers.push(marker);
+
+    var coord2 = new google.maps.LatLng(49.283958,-123.106306);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord2,
+      icon: 'images/sort/3.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord2);
+      infoWindow.setContent("VancouverAutoShow" + '<br>Number of people: ' + "122" + '<br>Distance: ' + "650m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='VancouverAutoShow.html'>details</a></button> ");
+      infoWindow.open(map);
+    });  
+    markers.push(marker);
+
+    var coord2 = new google.maps.LatLng(49.276020,-123.133777);
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      position: coord2,
+      icon: 'images/sort/4.png'
+    });
+    google.maps.event.addListener(marker, 'click', function(event) {
+      infoWindow.setPosition(coord2);
+      infoWindow.setContent("CarAccident" + '<br>Number of people: ' + "20" + '<br>Distance: ' + "800m" 
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='CarAccident.html'>details</a></button> ");
+      infoWindow.open(map);
+    });  
+    markers.push(marker);     
   },
 
   findMe: function() {
