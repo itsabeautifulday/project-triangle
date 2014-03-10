@@ -17,25 +17,25 @@
 <body>
 <!-- the Events details page begins here, use jQuery to swap between this and the map -->
 <div id="details">
-    <div class='navbar navbar-default navbar-fixed-top'>
-      <div class="navbar-header">
-        <div id="back_button">
-          <button type="button" class="btn btn-default navbar-btn btn-sm" id="back">
-            <a href="index.html"><span>Back</span></a>
-          </button>
-        </div>
-        <div class='title_bar'>
-          <h4>
-            Magic Show
-          </h4>
-        </div>
-        <div id="search_button">
-          <button class="btn btn-primary navbar-btn pull-right btn-sm" id="share" data-toggle="modal" data-target="#share-page">
-            Share
-          </button>
-        </div>
+<div id="detailNav" class='navbar navbar-default navbar-fixed-top'>
+  <div class='container'>
+    <div class="navbar-header">
+      <div class="col-xs-2">
+      <button type="button" class="btn btn-default navbar-btn btn-sm" id="back">
+        <a href="index.html"><span>Back</span></a>
+      </button>
       </div>
-    </div> 
+
+      <div class="col-xs-8">
+      <a class="navbar-brand" href='index.html'>What's Happening?</a>
+      </div>
+        
+      <div class="col-xs-2">
+      <button class="btn btn-primary navbar-btn pull-right btn-sm" id="share" data-toggle="modal" data-target="#share-page">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div class="modal fade" id="share-page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -118,9 +118,9 @@
           <span class="photo-slide glyphicon glyphicon-chevron-left"></span>
         </div>
         <div class="col-xs-8">
-          <img src="http://placehold.it/60x60">
-          <img src="http://placehold.it/60x60">
-          <img src="http://placehold.it/60x60">
+          <img src="http://placehold.it/50x50">
+          <img src="http://placehold.it/50x50">
+          <img src="http://placehold.it/50x50">
         </div>
 
         <div class="col-xs-2">
