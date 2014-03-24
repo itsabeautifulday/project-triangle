@@ -84,33 +84,20 @@
       
       <div id="content" class="row">
         <div class='col-md-12'>
-          <div id="map_canvas"></div>
-			<div id="current_location">
-			  <button class="btn btn-default navbar-btn pull-right">
-              <span class="fa fa-location-arrow" id="curr_loc"></span></button>
-			</div>
-            <div id="event_list">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <div data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <button class="btn btn-success btn-xs">Discover</button>
-                        </div>
-                      </div>
-                    </div>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                  <ul class="list-group">
-                    <li class="list-group-item" id="all"><a href="#">Reset</a></li>
-                    <li class="list-group-item" id="trending"><a href="#">Most Popular Events</a></li>
-                    <li class="list-group-item" id="nearest"><a href="#">Nearest Events</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+<!--           <div id="map_canvas"></div> -->
+
+        </div>
+
+      </div>
+
+      <div class='row'>
+        <div class="col-md-12">
+        <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
         </div>
       </div>
     </div>
@@ -128,90 +115,91 @@
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type='text/javascript'>
       //<![CDATA[
-        $(window).resize(function () {
-          var h = $(window).height(),
-            offsetTop = 0; // This involves the navbar (51) and a 1 pxl gap between 
-          $('#map_canvas').css('height', (h - offsetTop));
-        }).resize();
+  //       $(window).resize(function () {
+  //         var h = $(window).height(),
+  //           offsetTop = 0; // This involves the navbar (51) and a 1 pxl gap between 
+  //         $('#map_canvas').css('height', (h - offsetTop));
+  //       }).resize();
 
-        //hides the menus
-        MapsLib.hideMenus();
+  //       //hides the menus
+  //       MapsLib.hideMenus();
         
-        $(document).ready(function() {
-        $( "#search" ).click(function() {
-          $("#search-bar").slideToggle();
-        });
+  //       $(document).ready(function() {
+  //       $( "#search" ).click(function() {
+  //         $("#search-bar").slideToggle();
+  //       });
 
-        });
+  //       });
 		
-		// load required pacakges used for query visualization on map
-        google.load('visualization', '1', {packages: ['table']});
+		// // load required pacakges used for query visualization on map
+  //       google.load('visualization', '1', {packages: ['table']});
 		
-		// methods for location jumping
-		$("#loc_dt").on("click", function() {
-		  $("#default_loc").text($("#loc_dt").text());
-		  $(collapseLoc).collapse('hide');
-		  MapsLib.locationJump("loc_dt");
-		});
+		// // methods for location jumping
+		// $("#loc_dt").on("click", function() {
+		//   $("#default_loc").text($("#loc_dt").text());
+		//   $(collapseLoc).collapse('hide');
+		//   MapsLib.locationJump("loc_dt");
+		// });
 		
-		$("#loc_burnaby").on("click", function() {
-		  $("#default_loc").text($("#loc_burnaby").text());
-		  $(collapseLoc).collapse('hide');
-		  MapsLib.locationJump("loc_burnaby");
-		});
+		// $("#loc_burnaby").on("click", function() {
+		//   $("#default_loc").text($("#loc_burnaby").text());
+		//   $(collapseLoc).collapse('hide');
+		//   MapsLib.locationJump("loc_burnaby");
+		// });
 		
-		$("#loc_coquitlam").on("click", function() {
-		  $("#default_loc").text($("#loc_coquitlam").text());
-		  $(collapseLoc).collapse('hide');
-		  MapsLib.locationJump("loc_coquitlam");
-		});
+		// $("#loc_coquitlam").on("click", function() {
+		//   $("#default_loc").text($("#loc_coquitlam").text());
+		//   $(collapseLoc).collapse('hide');
+		//   MapsLib.locationJump("loc_coquitlam");
+		// });
 		
-		$("#loc_surrey").on("click", function() {
-		  $("#default_loc").text($("#loc_surrey").text());
-		  $(collapseLoc).collapse('hide');
-		  MapsLib.locationJump("loc_surrey");
-		});
+		// $("#loc_surrey").on("click", function() {
+		//   $("#default_loc").text($("#loc_surrey").text());
+		//   $(collapseLoc).collapse('hide');
+		//   MapsLib.locationJump("loc_surrey");
+		// });
 
-        $(function() {
-          MapsLib.initialize();
+  //       $(function() {
+  //         MapsLib.initialize();
            
-          $('#current_location').click(function(){
-            MapsLib.findMe();
-			$("#default_loc").text($("#loc_dt").text());
-            return false;
-          });
+  //         $('#current_location').click(function(){
+  //           MapsLib.findMe();
+		// 	$("#default_loc").text($("#loc_dt").text());
+  //           return false;
+  //         });
 
           
-          $(":text").keydown(function(e){
-              var key =  e.keyCode ? e.keyCode : e.which;
-              if(key == 13) {
+  //         $(":text").keydown(function(e){
+  //             var key =  e.keyCode ? e.keyCode : e.which;
+  //             if(key == 13) {
 
-                if($("#search-bar").val() != ""){
-                  MapsLib.search();
-                  return false;
-                }
-                else {
-                  MapsLib.plotMap();
-                  return false;
-                }
-              }
-          });
-
-
-          $('#all').click(function(){
-              MapsLib.plotMap();
-          });
-
-          $('#trending').click(function(){
-              MapsLib.findTrending();
-          });
-
-          $("#nearest").click(function(){
-              MapsLib.findNearest();
-          });
+  //               if($("#search-bar").val() != ""){
+  //                 MapsLib.search();
+  //                 return false;
+  //               }
+  //               else {
+  //                 MapsLib.plotMap();
+  //                 return false;
+  //               }
+  //             }
+  //         });
 
 
-        });
+  //         $('#all').click(function(){
+  //             MapsLib.plotMap();
+  //         });
+
+  //         $('#trending').click(function(){
+  //             MapsLib.findTrending();
+  //         });
+
+  //         $("#nearest").click(function(){
+  //             MapsLib.findNearest();
+  //         });
+
+
+  //       });
+
 
         $("#menu a").click(function(e) {
           $('#menu').collapse('toggle');
