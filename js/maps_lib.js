@@ -122,7 +122,7 @@ var MapsLib = {
     var marker = new google.maps.Marker({
       map: map,
       position: coordinate,
-      icon: new google.maps.MarkerImage(MapsLib.eventMarkerIcon)
+      icon: new google.maps.MarkerImage('images/labels/' + eventname + '.png')
     });
 
     markers.push(marker);
@@ -206,7 +206,8 @@ var MapsLib = {
     var marker = new google.maps.Marker({
       map: map,
       position: coord1,
-      icon: 'images/sort/1.png'
+      //icon: 'images/sort/1.png'
+	  icon: 'images/labels/MagicShow.png'
     });
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coord1);
@@ -216,12 +217,13 @@ var MapsLib = {
     });
     markers.push(marker);
 
-    var coord2 = new google.maps.LatLng(49.289177,-123.116032);
+    var coord2 = new google.maps.LatLng(49.283958,-123.106306);
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       map: map,
       position: coord2,
-      icon: 'images/sort/2.png'
+      //icon: 'images/sort/2.png'
+	  icon: 'images/labels/JazzFestival.png'
     });
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coord2);
@@ -231,12 +233,13 @@ var MapsLib = {
     });
     markers.push(marker);
 
-    var coord3 = new google.maps.LatLng(49.283958,-123.106306);
+    var coord3 = new google.maps.LatLng(49.289177,-123.116032);
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       map: map,
       position: coord3,
-      icon: 'images/sort/3.png'
+      //icon: 'images/sort/3.png'
+	  icon: 'images/labels/VancouverAutoShow.png'
     });
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coord3);
@@ -251,7 +254,8 @@ var MapsLib = {
     var marker = new google.maps.Marker({
       map: map,
       position: coord4,
-      icon: 'images/sort/4.png'
+      //icon: 'images/sort/4.png'
+	  icon: 'images/labels/CarAccident.png'
     });
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coord4);
