@@ -95,7 +95,7 @@ var MapsLib = {
   plotMap: function(map) {
     MapsLib.setAllMap(null);
 
-    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates FROM " + MapsLib.fusionTableId;
+    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, ID FROM " + MapsLib.fusionTableId;
     query = encodeURIComponent(query);
     var gvizQuery = new google.visualization.Query(
       'http://www.google.com/fusiontables/gvizdata?tq=' + query);
@@ -104,20 +104,21 @@ var MapsLib = {
       var numRows = response.getDataTable().getNumberOfRows();
       // For each row in the table, create a marker
       for (var i = 0; i < numRows; i++) {
-        var eventname = response.getDataTable().getValue(i, 0);
+		var eventname = response.getDataTable().getValue(i, 0);
         var size = response.getDataTable().getValue(i, 1);
         var distance = response.getDataTable().getValue(i, 2);
         var stringCoordinates = response.getDataTable().getValue(i, 3);
+        var eventid = response.getDataTable().getValue(i, 4);
         var splitCoordinates = stringCoordinates.split(',');
         var lat = splitCoordinates[0];
         var lng = splitCoordinates[1];
         var coordinate = new google.maps.LatLng(lat, lng);
-        MapsLib.createEventMarker(eventname, size, distance, coordinate);
+        MapsLib.createEventMarker(eventid, eventname, size, distance, coordinate);
       }
     });	
   },
   
-  createEventMarker: function(eventname, size, distance, coordinate) {
+  createEventMarker: function(eventid, eventname, size, distance, coordinate) {
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       map: map,
@@ -129,7 +130,7 @@ var MapsLib = {
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coordinate);
       infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance 
-        + '<br>' + "<button class='btn btn-default btn-xs'><a href='"+eventname+".html'>details</a></button> ");
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='eventdetails.html?event="+eventid+"'>Details</a></button> ");
       infoWindow.open(map);
     });
   },
