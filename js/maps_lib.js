@@ -123,6 +123,16 @@ var MapsLib = {
       icon: new google.maps.MarkerImage(MapsLib.eventMarkerIcon)
     });
 
+ var imageBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(49.171468, -123.75938),
+      new google.maps.LatLng(49.165933, -123.82183));
+
+
+  historicalOverlay = new google.maps.GroundOverlay(
+      'images/sort/grad1.png',
+      imageBounds);
+  historicalOverlay.setMap(map);  
+
     markers.push(marker);
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setPosition(coordinate);
