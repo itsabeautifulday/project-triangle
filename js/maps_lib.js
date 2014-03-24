@@ -58,6 +58,7 @@ var MapsLib = {
     };
     map = new google.maps.Map($("#map_canvas")[0],myOptions);
     markers = [];
+	infowindows = new Array();
     // maintains map centerpoint for responsive design
     google.maps.event.addDomListener(map, 'idle', function() {
         MapsLib.calculateCenter();
@@ -69,6 +70,7 @@ var MapsLib = {
 
     google.maps.event.addListener(map, 'click', function() {
         MapsLib.hideMenus();
+        MapsLib.closeAll();
     });    
     
     //plot points on map
@@ -91,11 +93,20 @@ var MapsLib = {
       markers[i].setMap(map);
     }
   },
+  
+  closeAll: function(map){
+    for (var i=0;i<gradientArray.length;i++) {
+      gradientArray[i].setMap(null);
+    }
+    for (var j = 0; j < infowindows.length; j++) {
+      infowindows[j].close();
+    }
+  },
 
   plotMap: function(map) {
     MapsLib.setAllMap(null);
 
-    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, ID FROM " + MapsLib.fusionTableId;
+    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, ID, gradient FROM " + MapsLib.fusionTableId;
     query = encodeURIComponent(query);
     var gvizQuery = new google.visualization.Query(
       'http://www.google.com/fusiontables/gvizdata?tq=' + query);
@@ -109,16 +120,17 @@ var MapsLib = {
         var distance = response.getDataTable().getValue(i, 2);
         var stringCoordinates = response.getDataTable().getValue(i, 3);
         var eventid = response.getDataTable().getValue(i, 4);
+		var gradient = response.getDataTable().getValue(i, 5);
         var splitCoordinates = stringCoordinates.split(',');
         var lat = splitCoordinates[0];
         var lng = splitCoordinates[1];
         var coordinate = new google.maps.LatLng(lat, lng);
-        MapsLib.createEventMarker(eventid, eventname, size, distance, coordinate);
+        MapsLib.createEventMarker(eventid, eventname, size, distance, coordinate, gradient);
       }
     });	
   },
   
-  createEventMarker: function(eventid, eventname, size, distance, coordinate) {
+  createEventMarker: function(eventid, eventname, size, distance, coordinate, gradient) {
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       map: map,
@@ -128,11 +140,14 @@ var MapsLib = {
 
     markers.push(marker);
     google.maps.event.addListener(marker, 'click', function(event) {
+	  MapsLib.closeAll();
       infoWindow.setPosition(coordinate);
       infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance 
         + '<br>' + "<button class='btn btn-default btn-xs'><a href='eventdetails.html?event="+eventid+"'>Details</a></button> ");
       infoWindow.open(map);
+      gradientArray[gradient - 1].setMap(map);
     });
+    infowindows[gradient - 1] = infoWindow;
   },
 
   findTrending: function(){
@@ -335,7 +350,10 @@ var MapsLib = {
   },
   
   plotGradients: function() {
-    gradient1Overlay = new google.maps.GroundOverlay(
+      
+	gradientArray = new Array();
+  
+    gradientArray[0] = new google.maps.GroundOverlay(
       'images/gradients/gradient1.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.28764739221695, -123.1190136104593),
@@ -343,7 +361,7 @@ var MapsLib = {
 	  )  
 	);
 	
-	gradient2Overlay = new google.maps.GroundOverlay(
+	gradientArray[1] = new google.maps.GroundOverlay(
       'images/gradients/gradient2.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.28525864062805, -123.1206572897644),
@@ -351,7 +369,7 @@ var MapsLib = {
 	  )	  
 	);
 	
-	gradient3Overlay = new google.maps.GroundOverlay(
+	gradientArray[2] = new google.maps.GroundOverlay(
       'images/gradients/gradient3.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.28496964759476, -123.1277203044121),
@@ -359,7 +377,7 @@ var MapsLib = {
 	  )	  
 	);
 	
-	gradient4Overlay = new google.maps.GroundOverlay(
+	gradientArray[3] = new google.maps.GroundOverlay(
       'images/gradients/gradient4.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.28184803470223, -123.1194817101374),
@@ -367,7 +385,7 @@ var MapsLib = {
 	  )  
 	);
 	
-	gradient5Overlay = new google.maps.GroundOverlay(
+	gradientArray[4] = new google.maps.GroundOverlay(
       'images/gradients/gradient5.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.28167843232753, -123.131121127534),
@@ -375,7 +393,7 @@ var MapsLib = {
 	  )	  
 	);
 	
-	gradient6Overlay = new google.maps.GroundOverlay(
+	gradientArray[5] = new google.maps.GroundOverlay(
       'images/gradients/gradient6.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.27541725404126, -123.1355744345223),
@@ -383,7 +401,7 @@ var MapsLib = {
 	  )	  
 	);
 	
-	gradient7Overlay = new google.maps.GroundOverlay(
+	gradientArray[6] = new google.maps.GroundOverlay(
       'images/gradients/gradient7.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.27849957271322, -123.126544922702),
@@ -391,7 +409,7 @@ var MapsLib = {
 	  )	  
 	);
 	
-	gradient8Overlay = new google.maps.GroundOverlay(
+	gradientArray[7] = new google.maps.GroundOverlay(
       'images/gradients/gradient8.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.2840825701532, -123.1046108428064),
@@ -399,7 +417,7 @@ var MapsLib = {
 	  )	  
 	);
 	
-	gradient9Overlay = new google.maps.GroundOverlay(
+	gradientArray[8] = new google.maps.GroundOverlay(
       'images/gradients/gradient9.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.28312927075879, -123.1097415988195),
@@ -407,7 +425,7 @@ var MapsLib = {
 	  )  
 	);
 	
-	gradient10Overlay = new google.maps.GroundOverlay(
+	gradientArray[9] = new google.maps.GroundOverlay(
       'images/gradients/gradient10.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.27490682747691, -123.11568461933),
@@ -415,7 +433,7 @@ var MapsLib = {
 	  )  
 	);
 	
-    gradient11Overlay = new google.maps.GroundOverlay(
+    gradientArray[10] = new google.maps.GroundOverlay(
       'images/gradients/gradient11.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.2207572906352, -123.0186575848295),
@@ -423,7 +441,7 @@ var MapsLib = {
 	  )  
 	);
 	
-    gradient12Overlay = new google.maps.GroundOverlay(
+    gradientArray[11] = new google.maps.GroundOverlay(
       'images/gradients/gradient12.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.23167975675577, -123.0085593262571),
@@ -431,7 +449,7 @@ var MapsLib = {
 	  )  
 	);
 	
-	gradient13Overlay = new google.maps.GroundOverlay(
+	gradientArray[12] = new google.maps.GroundOverlay(
       'images/gradients/gradient13.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.22381364872149, -123.0053043964758),
@@ -439,7 +457,7 @@ var MapsLib = {
 	  )  
 	);
 	
-	gradient14Overlay = new google.maps.GroundOverlay(
+	gradientArray[13] = new google.maps.GroundOverlay(
       'images/gradients/gradient14.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.2218562822333, -122.9981057652487),
@@ -447,7 +465,7 @@ var MapsLib = {
 	  )  
 	);
 	
-	gradient15Overlay = new google.maps.GroundOverlay(
+	gradientArray[14] = new google.maps.GroundOverlay(
       'images/gradients/gradient15.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.22090784193556, -123.0059910527251),
@@ -455,7 +473,7 @@ var MapsLib = {
 	  )  
 	);
 	
-    gradient16Overlay = new google.maps.GroundOverlay(
+    gradientArray[15] = new google.maps.GroundOverlay(
       'images/gradients/gradient16.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.18349504918952, -122.8325951427916),
@@ -463,30 +481,12 @@ var MapsLib = {
 	  )  
 	);
 	
-	gradient17Overlay = new google.maps.GroundOverlay(
+	gradientArray[16] = new google.maps.GroundOverlay(
       'images/gradients/gradient17.png',
       new google.maps.LatLngBounds(
 	    new google.maps.LatLng(49.17715961734528, -122.8239649472493),
 		new google.maps.LatLng(49.18188680448908, -122.8199438609455)
 	  )  
 	);
-	
-    gradient1Overlay.setMap(map);
-	gradient2Overlay.setMap(map);
-	gradient3Overlay.setMap(map);
-	gradient4Overlay.setMap(map);
-	gradient5Overlay.setMap(map);
-	gradient6Overlay.setMap(map);
-	gradient7Overlay.setMap(map);
-	gradient8Overlay.setMap(map);
-	gradient9Overlay.setMap(map);
-    gradient10Overlay.setMap(map);
-	gradient11Overlay.setMap(map);
-	gradient12Overlay.setMap(map);
-	gradient13Overlay.setMap(map);
-	gradient14Overlay.setMap(map);
-	gradient15Overlay.setMap(map);
-	gradient16Overlay.setMap(map);
-	gradient17Overlay.setMap(map);
   }
 }
