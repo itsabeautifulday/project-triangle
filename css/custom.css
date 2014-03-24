@@ -90,8 +90,7 @@ body {
  }
 
 #details-content {
-  padding-top: 60px;
-  
+  padding-top: 65px;
 }
 
 #share-page {
@@ -105,12 +104,13 @@ body {
 }
 
 .avatar {
-  width: 60%;
+  width: 35px;
+  margin: 0 auto 5 auto;
+  display: block;
 }
 
 .wordcloud-main {
   font-size: 18px;
-
 }
 
 .wordcloud-secondary {
@@ -188,6 +188,36 @@ canvas {-ms-touch-action: double-tap-zoom;}
 #search_bar {
 	position: absolute;
 	top: 20px;
+}
+
+#back_button {
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	left: 0px;
+}
+
+#share_button {
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	right: 0px;
+}
+
+.event_photos {
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#results {
+	display: none;
+}
+
+.event-map {
+  width: 100%;
+  background-image:url('../images/event-details-map.png');  
+  height: 100px;
 }
 
 /*
