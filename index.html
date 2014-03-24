@@ -27,7 +27,7 @@
         <ul class="nav nav-tabs nav-stacked">
           <li>Default Location:</li>
           <li>                      
-		    <select class="form-control">
+        <select class="form-control">
               <option value="one">Downtown Vancouver</option>
               <option value="two">Coquitlam</option>
               <option value="three">Burnaby</option>
@@ -38,12 +38,12 @@
           <li><a>Facebook</a></li>
           <li><a>Twitter</a></li>
           <li><a>Instagram</a></li>
-		  <li><a>Foursquare</a></li>
-		  <li><a>Google+</a></li>
+      <li><a>Foursquare</a></li>
+      <li><a>Google+</a></li>
         </ul>
       </div>
     </div>
-	
+  
     <div class="view">
       <div class='navbar navbar-default navbar-static-top'>
         <div class="navbar-header">
@@ -69,35 +69,307 @@
           </div>
         </div>
 
-		  <div id="search_button">
-          <button class="btn btn-default navbar-btn pull-left">
-              <span class="glyphicon glyphicon-search" id="search"></span>
-			    </button>
-      </div>
-      </div>
-
-          <div class='col-md-12'>
-            <input class='form-control' id='search-bar' placeholder='Search for event keywords, location' type='text' />
+      <div id="search_button">
+            <button class="btn btn-default navbar-btn pull-left" href="search.html">
+              <a href="search.html">
+                <span class="glyphicon glyphicon-search" id="search"></span>
+              </a>
+      </button>
           </div>
-
+        </div>
       </div> 
       
       <div id="content" class="row">
         <div class='col-md-12'>
-<!--           <div id="map_canvas"></div> -->
+          <div id="map_canvas"></div>
 
-        </div>
+          <div id="event_list_dt">
+            <div class="row col-md-12">
+              <select class="form-control">
+                <h5>Sort By: </h5>
+                <option value="one">Closest</option>
+                <option value="two">Furthest</option>
+                <option value="three">Size (Decreasing)</option>
+                <option value="four">Size (Increasing)</option>                
+              </select>
+            </div>
+            <div class="row col-md-12">
+                  <ul class="list-group">
+                    <li class="list-group-item" id="autoshow">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="autoshow.html">Vancouver Auto Show</a>
+                        </div>
+                        <div class="col-xs-2"></div>
+                      </div>
+                      <p>Distance: 200m</p>
+                      <p>Location: Vancouver Convention Centre</p>
+                      <p>Number of People: 452</p>
+                      <p>Event Radius: 600m</p>
+                    </li>
+                    <li class="list-group-item" id="jazzfest">
+                      <div class="row">
+                        <div class="col-xs-10">
 
-      </div>
+                      <a href="jazzfest.html">Jazz Festival</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 400m</p>
+                      <p>Location: Robson Square</p>
+                      <p>Number of People: 132</p>
+                      <p>Event Radius: 500m</p>
+                    </li>
+                    <li class="list-group-item" id="magicshow">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="magicshow.html">Magic Show</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 500m</p>
+                      <p>Location: Granville Street</p>
+                      <p>Number of People: 32</p>
+                      <p>Event Radius: 200m</p>
+                    </li>            
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Car Accident</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 700m</p>
+                      <p>Location: Burrard Street at Pacific Street</p>
+                      <p>Number of People: 27</p>
+                      <p>Event Radius: 100m</p>
+                    </li>
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Street Food</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 800m</p>
+                      <p>Location: Burrard Street at Nelson Street</p>
+                      <p>Number of People: 30</p>
+                      <p>Event Radius: 300m</p>
+                    </li>
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">H&M Sale</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 1100m</p>
+                      <p>Location: Pacific Centre</p>
+                      <p>Number of People: 97</p>
+                      <p>Event Radius: 500m</p>
+                    </li>
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Choir Flash Mob</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 1100m</p>
+                      <p>Location: Robson Street at Denman Street</p>
+                      <p>Number of People: 42</p>
+                      <p>Event Radius: 300m</p>
+                    </li>
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Distant World Concert</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 1200m</p>
+                      <p>Location: Ophreum Theatre</p>
+                      <p>Number of People: 321</p>
+                      <p>Event Radius: 500m</p>
+                    </li>
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Japadog</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 1400m</p>
+                      <p>Location: Burrard Street at Pender Street</p>
+                      <p>Number of People: 12</p>
+                      <p>Event Radius: 50m</p>
+                    </li> 
 
-      <div class='row'>
-        <div class="col-md-12">
-        <select>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Need For Speed</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 1400m</p>
+                      <p>Location: Scotia Bank Theatre</p>
+                      <p>Number of People: 107</p>
+                      <p>Event Radius: 500m</p>
+                    </li>                                                                                                                                           
+                  </ul>
+            </div>
+          </div>
+
+        <div id="event_list_coquitlam">
+            <div class="row col-md-12">
+              <select class="form-control">
+                <h5>Sort By: </h5>
+                <option value="one">Closest</option>
+                <option value="two">Furthest</option>
+                <option value="three">Size (Decreasing)</option>
+                <option value="four">Size (Increasing)</option>                
+              </select>
+            </div>
+            <div class="row col-md-12">
+                  <ul class="list-group">
+                    <li class="list-group-item" id="autoshow">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="autoshow.html">Korean Cultural Festival</a>
+                        </div>
+                        <div class="col-xs-2"></div>
+                      </div>
+                      <p>Distance: 15km</p>
+                      <p>Location: Lougheed Town Centre</p>
+                      <p>Number of People: 121</p>
+                      <p>Event Radius: 600m</p>
+                    </li>
+                    <li class="list-group-item" id="jazzfest">
+                      <div class="row">
+                        <div class="col-xs-10">
+
+                      <a href="jazzfest.html">Flea Market</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 16km</p>
+                      <p>Location: Robson Square</p>
+                      <p>Number of People: 93</p>
+                      <p>Event Radius: 500m</p>
+                    </li>
+                    <li class="list-group-item" id="magicshow">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="magicshow.html">Magic Show</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 500m</p>
+                      <p>Location: Granville Street</p>
+                      <p>Number of People: 32</p>
+                      <p>Event Radius: 200m</p>
+                    </li>            
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Car Accident</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 700m</p>
+                      <p>Location: Burrard Street at Pacific Street</p>
+                      <p>Number of People: 27</p>
+                      <p>Event Radius: 100m</p>
+                    </li>
+                    <li class="list-group-item" id="caraccident">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="caraccident.html">Street Food</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 800m</p>
+                      <p>Location: Burrard Street at Nelson Street</p>
+                      <p>Number of People: 30</p>
+                      <p>Event Radius: 300m</p>
+                    </li>
+                                                                                                                                          
+                  </ul>
+            </div>
+          </div>
+
+        <div id="event_list_surrey">
+            <div class="row col-md-12">
+              <select class="form-control">
+                <h5>Sort By: </h5>
+                <option value="one">Closest</option>
+                <option value="two">Furthest</option>
+                <option value="three">Size (Decreasing)</option>
+                <option value="four">Size (Increasing)</option>                
+              </select>
+            </div>
+            <div class="row col-md-12">
+                  <ul class="list-group">
+                    <li class="list-group-item" id="autoshow">
+                      <div class="row">
+                        <div class="col-xs-10">
+                      <a href="autoshow.html">Flea Market</a>
+                        </div>
+                        <div class="col-xs-2"></div>
+                      </div>
+                      <p>Distance: 20km</p>
+                      <p>Location: Surrey Centre</p>
+                      <p>Number of People: 102</p>
+                      <p>Event Radius: 800m</p>
+                    </li>
+                    <li class="list-group-item" id="jazzfest">
+                      <div class="row">
+                        <div class="col-xs-10">
+
+                      <a href="jazzfest.html">Gallery Night</a>
+                      </div>
+                      <div class="col-xs-2">
+                        
+                      </div>
+                    </div>
+                      <p>Distance: 21km</p>
+                      <p>Location: Simon Fraser University</p>
+                      <p>Number of People: 93</p>
+                      <p>Event Radius: 600m</p>
+                    </li>
+
+                                                                                                                                          
+                  </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -112,98 +384,87 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places&v=3.14"></script>
     <script type="text/javascript" src="js/jquery.geocomplete.min.js"></script>
     <script type="text/javascript" src="js/maps_lib.js"></script>
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type='text/javascript'>
       //<![CDATA[
-  //       $(window).resize(function () {
-  //         var h = $(window).height(),
-  //           offsetTop = 0; // This involves the navbar (51) and a 1 pxl gap between 
-  //         $('#map_canvas').css('height', (h - offsetTop));
-  //       }).resize();
-
-  //       //hides the menus
-  //       MapsLib.hideMenus();
+        $(window).resize(function () {
+          var h = $(window).height(),
+            offsetTop = 0; // This involves the navbar (51) and a 1 pxl gap between 
+          $('#map_canvas').css('height', (h - offsetTop));
+        }).resize();
         
-  //       $(document).ready(function() {
-  //       $( "#search" ).click(function() {
-  //         $("#search-bar").slideToggle();
-  //       });
+    // Hide all menus
+        MapsLib.hideMenus();
+    
+    
+        $(document).ready(function() {
+        $( "#search" ).click(function() {
+          $("#search_address").slideToggle();
+        });
 
-  //       });
-		
-		// // load required pacakges used for query visualization on map
-  //       google.load('visualization', '1', {packages: ['table']});
-		
-		// // methods for location jumping
-		// $("#loc_dt").on("click", function() {
-		//   $("#default_loc").text($("#loc_dt").text());
-		//   $(collapseLoc).collapse('hide');
-		//   MapsLib.locationJump("loc_dt");
-		// });
-		
-		// $("#loc_burnaby").on("click", function() {
-		//   $("#default_loc").text($("#loc_burnaby").text());
-		//   $(collapseLoc).collapse('hide');
-		//   MapsLib.locationJump("loc_burnaby");
-		// });
-		
-		// $("#loc_coquitlam").on("click", function() {
-		//   $("#default_loc").text($("#loc_coquitlam").text());
-		//   $(collapseLoc).collapse('hide');
-		//   MapsLib.locationJump("loc_coquitlam");
-		// });
-		
-		// $("#loc_surrey").on("click", function() {
-		//   $("#default_loc").text($("#loc_surrey").text());
-		//   $(collapseLoc).collapse('hide');
-		//   MapsLib.locationJump("loc_surrey");
-		// });
+        });
+    
+    // load required pacakges used for query visualization on map
+        google.load('visualization', '1', {packages: ['table']});
+    
+    // methods for location jumping
+    $("#loc_dt").on("click", function() {
+      $("#default_loc").text($("#loc_dt").text());
+      $(collapseLoc).collapse('hide');
+      MapsLib.locationJump("loc_dt");
+    });
+    
+    $("#loc_burnaby").on("click", function() {
+      $("#default_loc").text($("#loc_burnaby").text());
+      $(collapseLoc).collapse('hide');
+      MapsLib.locationJump("loc_burnaby");
+    });
+    
+    $("#loc_coquitlam").on("click", function() {
+      $("#default_loc").text($("#loc_coquitlam").text());
+      $(collapseLoc).collapse('hide');
+      MapsLib.locationJump("loc_coquitlam");
+    });
+    
+    $("#loc_surrey").on("click", function() {
+      $("#default_loc").text($("#loc_surrey").text());
+      $(collapseLoc).collapse('hide');
+      MapsLib.locationJump("loc_surrey");
+    });
 
-  //       $(function() {
-  //         MapsLib.initialize();
+        $(function() {
+          MapsLib.initialize();
            
-  //         $('#current_location').click(function(){
-  //           MapsLib.findMe();
-		// 	$("#default_loc").text($("#loc_dt").text());
-  //           return false;
-  //         });
-
-          
-  //         $(":text").keydown(function(e){
-  //             var key =  e.keyCode ? e.keyCode : e.which;
-  //             if(key == 13) {
-
-  //               if($("#search-bar").val() != ""){
-  //                 MapsLib.search();
-  //                 return false;
-  //               }
-  //               else {
-  //                 MapsLib.plotMap();
-  //                 return false;
-  //               }
-  //             }
-  //         });
-
-
-  //         $('#all').click(function(){
-  //             MapsLib.plotMap();
-  //         });
-
-  //         $('#trending').click(function(){
-  //             MapsLib.findTrending();
-  //         });
-
-  //         $("#nearest").click(function(){
-  //             MapsLib.findNearest();
-  //         });
-
-
-  //       });
-
+          $('#current_location').click(function(){
+            MapsLib.findMe();
+      $("#default_loc").text($("#loc_dt").text());
+            return false;
+          });
+                  
+        });
 
         $("#menu a").click(function(e) {
           $('#menu').collapse('toggle');
         });
+
+
+        $("#loc_coquitlam").click(function(){
+          $("#event_list_surrey").hide();
+          $("#event_list_dt").hide();
+          $("#event_list_coquitlam").show();
+        });
+
+        $("#loc_dt").click(function(){
+          $("#event_list_coquitlam").hide();
+          $("#event_list_surrey").hide();
+          $("#event_list_dt").show();
+        });
+
+        $("#loc_surrey").click(function(){
+          $("#event_list_coquitlam").hide();
+          $("#event_list_dt").hide();
+          $("#event_list_surrey").show();
+        });        
         
       //]]>
     </script>

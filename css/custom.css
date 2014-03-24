@@ -137,11 +137,23 @@ body {
 
 canvas {-ms-touch-action: double-tap-zoom;}
 
-#event_list {
-  position: absolute;
-  z-index: 10000;
-  bottom: 0px;
-  width: 100vw;
+#events {
+  overflow-y:scroll;
+}
+
+#event_list_dt, #event_list_coquitlam, #event_list_surrey {
+  overflow-y:scroll;
+  overflow-x:hidden;
+  position: fixed;
+  top: 0px;
+  height: 100vh;
+  width: 100%;
+  padding-top: 70px;
+  background-color: #ffffff;
+}
+
+#event_list_coquitlam, #event_list_surrey {
+  display: none;
 }
 
 #current_location {
