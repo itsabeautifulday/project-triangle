@@ -410,6 +410,62 @@ var MapsLib = {
 	  )  
 	);
 	
+    gradient11Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient11.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.2207572906352, -123.0186575848295),
+		new google.maps.LatLng(49.22579178716334, -123.0108829417311)
+	  )  
+	);
+	
+    gradient12Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient12.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.23167975675577, -123.0085593262571),
+		new google.maps.LatLng(49.23489878330205, -123.0026552627423)
+	  )  
+	);
+	
+	gradient13Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient13.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.22381364872149, -123.0053043964758),
+		new google.maps.LatLng(49.22997559302053, -122.9946481421073)
+	  )  
+	);
+	
+	gradient14Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient14.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.2218562822333, -122.9981057652487),
+		new google.maps.LatLng(49.22442058691102, -122.9935662336601)
+	  )  
+	);
+	
+	gradient15Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient15.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.22090784193556, -123.0059910527251),
+		new google.maps.LatLng(49.22290018509281, -122.9970279316157)
+	  )  
+	);
+	
+    gradient16Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient16.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.18349504918952, -122.8325951427916),
+		new google.maps.LatLng(49.18574227186965, -122.8267781287327)
+	  )  
+	);
+	
+	gradient17Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient17.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.17715961734528, -122.8239649472493),
+		new google.maps.LatLng(49.18188680448908, -122.8199438609455)
+	  )  
+	);
+	
     gradient1Overlay.setMap(map);
 	gradient2Overlay.setMap(map);
 	gradient3Overlay.setMap(map);
@@ -420,6 +476,12 @@ var MapsLib = {
 	gradient8Overlay.setMap(map);
 	gradient9Overlay.setMap(map);
     gradient10Overlay.setMap(map);
-  
+	gradient11Overlay.setMap(map);
+	gradient12Overlay.setMap(map);
+	gradient13Overlay.setMap(map);
+	gradient14Overlay.setMap(map);
+	gradient15Overlay.setMap(map);
+	gradient16Overlay.setMap(map);
+	gradient17Overlay.setMap(map);
   }
 }
