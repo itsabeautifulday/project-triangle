@@ -81,7 +81,9 @@ var MapsLib = {
       map: map,
       icon: MapsLib.currLocationIcon,
       title:"You're here"
-    });     
+    });   
+
+    MapsLib.plotGradients();	
   },
 
   setAllMap: function(map){
@@ -122,16 +124,6 @@ var MapsLib = {
       position: coordinate,
       icon: new google.maps.MarkerImage(MapsLib.eventMarkerIcon)
     });
-
- var imageBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(49.171468, -123.75938),
-      new google.maps.LatLng(49.165933, -123.82183));
-
-
-  historicalOverlay = new google.maps.GroundOverlay(
-      'images/sort/grad1.png',
-      imageBounds);
-  historicalOverlay.setMap(map);  
 
     markers.push(marker);
     google.maps.event.addListener(marker, 'click', function(event) {
@@ -335,5 +327,99 @@ var MapsLib = {
   // maintains map centerpoint for responsive design
   calculateCenter: function() {
     center = map.getCenter();
+  },
+  
+  plotGradients: function() {
+    gradient1Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient1.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.28764739221695, -123.1190136104593),
+		new google.maps.LatLng(49.29048651159547, -123.1138502426526)
+	  )  
+	);
+	
+	gradient2Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient2.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.28525864062805, -123.1206572897644),
+		new google.maps.LatLng(49.28744570843607, -123.1173724791986)
+	  )	  
+	);
+	
+	gradient3Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient3.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.28496964759476, -123.1277203044121),
+		new google.maps.LatLng(49.28625456654555, -123.1256471037826)
+	  )	  
+	);
+	
+	gradient4Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient4.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.28184803470223, -123.1194817101374),
+		new google.maps.LatLng(49.28436190252548, -123.1150192720574)
+	  )  
+	);
+	
+	gradient5Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient5.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.28167843232753, -123.131121127534),
+		new google.maps.LatLng(49.28403941890748, -123.1280965087551)
+	  )	  
+	);
+	
+	gradient6Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient6.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.27541725404126, -123.1355744345223),
+		new google.maps.LatLng(49.27720194507742, -123.1328201647422)
+	  )	  
+	);
+	
+	gradient7Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient7.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.27849957271322, -123.126544922702),
+		new google.maps.LatLng(49.28142771090656, -123.1218526409933)
+	  )	  
+	);
+	
+	gradient8Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient8.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.2840825701532, -123.1046108428064),
+		new google.maps.LatLng(49.28683758544243, -123.1006000647186)
+	  )	  
+	);
+	
+	gradient9Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient9.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.28312927075879, -123.1097415988195),
+		new google.maps.LatLng(49.28473590299591, -123.1028231253418)
+	  )  
+	);
+	
+	gradient10Overlay = new google.maps.GroundOverlay(
+      'images/gradients/gradient10.png',
+      new google.maps.LatLngBounds(
+	    new google.maps.LatLng(49.27490682747691, -123.11568461933),
+		new google.maps.LatLng(49.27883029652434, -123.1096209729048)
+	  )  
+	);
+	
+    gradient1Overlay.setMap(map);
+	gradient2Overlay.setMap(map);
+	gradient3Overlay.setMap(map);
+	gradient4Overlay.setMap(map);
+	gradient5Overlay.setMap(map);
+	gradient6Overlay.setMap(map);
+	gradient7Overlay.setMap(map);
+	gradient8Overlay.setMap(map);
+	gradient9Overlay.setMap(map);
+    gradient10Overlay.setMap(map);
+  
   }
 }
