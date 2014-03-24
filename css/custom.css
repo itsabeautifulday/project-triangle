@@ -73,8 +73,7 @@ body {
 }
 
 #details-content {
-  padding-top: 60px;
-  
+  padding-top: 65px;
 }
 
 #share-page {
@@ -88,12 +87,13 @@ body {
 }
 
 .avatar {
-  width: 60%;
+  width: 35px;
+  margin: 0 auto 5 auto;
+  display: block;
 }
 
 .wordcloud-main {
   font-size: 18px;
-
 }
 
 .wordcloud-secondary {
@@ -196,6 +196,12 @@ canvas {-ms-touch-action: double-tap-zoom;}
 
 #results {
 	display: none;
+}
+
+.event-map {
+  width: 100%;
+  background-image:url('../images/event-details-map.png');  
+  height: 100px;
 }
 
 /*
