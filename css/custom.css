@@ -122,6 +122,9 @@ canvas {-ms-touch-action: double-tap-zoom;}
   z-index: 10000;
   bottom: 0px;
   width: 100vw;
+  max-height: 80vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #current_location {
