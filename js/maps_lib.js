@@ -86,7 +86,7 @@ var MapsLib = {
   },
 
   plotMap: function(map) {
-    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, id FROM " + MapsLib.fusionTableId;
+    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, ID FROM " + MapsLib.fusionTableId;
     query = encodeURIComponent(query);
     var gvizQuery = new google.visualization.Query(
       'http://www.google.com/fusiontables/gvizdata?tq=' + query);
