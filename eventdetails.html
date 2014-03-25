@@ -17,9 +17,11 @@
     <div class='navbar navbar-default navbar-fixed-top'>
       <div class="navbar-header">
         <div id="back_button">
-          <button type="button" class="btn btn-default navbar-btn btn-sm" id="back">
-            <a href="index.html"><span>Back</span></a>
-          </button>
+          <a href="index.html">
+            <button type="button" class="btn btn-default navbar-btn btn-sm" id="back">
+              <span>Back</span>
+            </button>
+          </a>
         </div>
         <div class='title_bar'>
           <h4 id="event-title"><!--FUSIONTABLE--></h4>
@@ -126,7 +128,8 @@
   <script type='text/javascript'>
     $(document).ready(function() {
       $(".navbar").css("background-color","rgba(139, 137, 137, 0.8)");
-
+      $("#back_button a").attr("href","index.html?region="+GetURLParameter("region"));
+      
       function dataHandler(d) {
         // Need to fill out fusion table to have this work
         console.log(d);
