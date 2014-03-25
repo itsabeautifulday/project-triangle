@@ -68,16 +68,16 @@
         </div>
 
 		  <div id="search_button">
-          <button class="btn btn-default navbar-btn pull-left">
-              <span class="glyphicon glyphicon-search" id="search"></span>
-			    </button>
+          <button class="btn btn-default navbar-btn pull-left" id="search">
+              <span class="glyphicon glyphicon-search"></span>
+		  </button>
       </div>
       </div>
-
-          <div class='col-md-12'>
-            <input class='form-control' id='search-bar' placeholder='Search for event keywords, location' type='text' />
-          </div>
-
+	  
+        <div id='search-bar' class='col-md-12'>
+            <input class='form-control' id='search-field' placeholder='Search for event keywords, location' type='text' /> 
+        </div>
+		
       </div> 
       
       <div id="content">
@@ -86,6 +86,10 @@
 			<div id="current_location">
 			  <button class="btn btn-default navbar-btn pull-right">
               <span class="fa fa-location-arrow" id="curr_loc"></span></button>
+			</div>
+					    <div id="clear_search">
+			  <button class="btn btn-default navbar-btn" id="clear-button">
+              <span>Clear</span></button>
 			</div>
             <div id="event_list">
               <div class="panel panel-default">
@@ -112,9 +116,6 @@
         </div>
       </div>
   </div>
-
-
-
 
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -153,6 +154,10 @@
         });
 
         });
+		
+		$("#clear-button").on("click", function() {
+		  MapsLib.clearSearch();
+		});
 		
 		// load required pacakges used for query visualization on map
         google.load('visualization', '1', {packages: ['table']});
@@ -196,12 +201,14 @@
               var key =  e.keyCode ? e.keyCode : e.which;
               if(key == 13) {
 
-                if($("#search-bar").val() != ""){
+                if($("#search-field").val() != ""){
                   MapsLib.search();
+				  $("#clear_search").show();
                   return false;
                 }
                 else {
                   MapsLib.plotMap();
+				  $("#clear_search").hide();
                   return false;
                 }
               }
