@@ -141,6 +141,18 @@ canvas {-ms-touch-action: double-tap-zoom;}
   overflow-y:scroll;
 }
 
+#sort_control {
+  padding-top: 50px;
+}
+
+#event_list {
+  overflow-y:scroll;
+  overflow-x:hidden;
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+}
+
 #event_list_dt, #event_list_coquitlam, #event_list_surrey {
   overflow-y:scroll;
   overflow-x:hidden;
