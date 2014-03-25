@@ -9,18 +9,16 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body>
-
-  <!-- the home page with the main map view -->
-  <div class="frame">
-    <div id="menu" class="menu collapse in width">
-      <div class="collapse-inner">
+  <body class="cbp-spmenu-push">
+  <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+    <div class="collapse-inner">
         <div class="menu-header"> 
           Main Menu
         </div>
@@ -42,13 +40,13 @@
 		  <li><a>Google+</a></li>
         </ul>
       </div>
-    </div>
+		</nav>
 	
-    <div class="view">
+    <div class="frame">
       <div class='navbar navbar-default navbar-static-top'>
         <div class="navbar-header">
           <div id="menu_button">
-            <button class=" btn btn-default navbar-btn pull-left" data-toggle="collapse" data-target="#menu"> 
+            <button class=" btn btn-default navbar-btn pull-left" id="showSideMenu"> 
               <span class="fa fa-bars" id="menu_bar"></span>
             </button>
           </div>
@@ -82,8 +80,8 @@
 
       </div> 
       
-      <div id="content" class="row">
-        <div class='col-md-12'>
+      <div id="content">
+        <div>
           <div id="map_canvas"></div>
 			<div id="current_location">
 			  <button class="btn btn-default navbar-btn pull-right">
@@ -113,7 +111,6 @@
             </div>
         </div>
       </div>
-    </div>
   </div>
 
 
@@ -126,8 +123,21 @@
     <script type="text/javascript" src="js/jquery.geocomplete.min.js"></script>
     <script type="text/javascript" src="js/maps_lib.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script src="js/classie.js"></script>
     <script type='text/javascript'>
       //<![CDATA[
+	  
+	  	  			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showSideMenu = document.getElementById( 'showSideMenu' ),
+				body = document.body;
+
+			showSideMenu.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+			};
+	  
+	  
         $(window).resize(function () {
           var h = $(window).height(),
             offsetTop = 0; // This involves the navbar (51) and a 1 pxl gap between 

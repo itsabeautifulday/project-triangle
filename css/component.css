@@ -1,0 +1,67 @@
+/* General styles for all menus */
+.cbp-spmenu {
+	position: fixed;
+	  background-color: white;
+}
+
+#cbp-spmenu-s1 {
+  background-color: white;
+}
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+	width: 175px;
+	height: 100%;
+	top: 0;
+	z-index: 100000;
+}
+
+/* Vertical menu that slides from the left or right */
+
+.cbp-spmenu-left {
+	left: -175px;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+	left: 0px;
+}
+
+/* Push classes applied to the body */
+
+.cbp-spmenu-push {
+	overflow-x: hidden;
+	position: relative;
+	left: 0;
+}
+
+.cbp-spmenu-push-toright {
+	left: 175px;
+}
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+/* Example media queries */
+
+@media screen and (max-height: 26.375em){
+
+	.cbp-spmenu-vertical {
+		font-size: 90%;
+		width: 175px;
+	}
+
+	.cbp-spmenu-left {
+		left: -175px;
+	}
+
+	.cbp-spmenu-push-toright {
+		left: 175px;
+	}
+}
