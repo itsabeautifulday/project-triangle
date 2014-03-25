@@ -2,37 +2,16 @@ a { color: #4B58A6; }
 a:hover { color: #4B58A6; }
 
 body {
-  overflow-x: hidden;
+  overflow: hidden;
+  background: white;
 }
 ::-webkit-scrollbar {
     display: none;
 }
 
 .frame {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.view {
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.menu {
-  height: 100% !important;
-  float: left;
-  position: relative;
-  overflow: hidden;
-  -webkit-transition: width 0.35s ease;
-  -moz-transition: width 0.35s ease;
-  -o-transition: width 0.35s ease;
-  transition: width 0.35s ease;
+  overflow-x: hidden;
+  z-index: 100;
 }
 
 .menu-header {
@@ -48,6 +27,7 @@ body {
   height: 100%;
   padding-left:10px;
   padding-right:10px;
+  background-color: white;
 }
 
 #map_canvas img {
@@ -200,6 +180,14 @@ canvas {-ms-touch-action: double-tap-zoom;}
   border-radius: 0;
 }
 
+.detail_header{
+ background-color: white;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
 .title_bar {
 	position: absolute;
 	z-index: 1000;
@@ -208,6 +196,8 @@ canvas {-ms-touch-action: double-tap-zoom;}
 	right:0;
 	text-align: center;
 	color: #000000;
+	padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #search_bar {
