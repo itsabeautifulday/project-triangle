@@ -38,7 +38,7 @@ var MapsLib = {
   recordNamePlural:   "results",
 
   searchRadius:       805,            //in meters ~ 1/2 mile
-  defaultZoom:        13,             //zoom level when map is loaded (bigger is more zoomed in)
+  defaultZoom:        14,             //zoom level when map is loaded (bigger is more zoomed in)
   currLocationIcon:   'images/curr-loc.png',
   eventMarkerIcon:    'images/red-dot.png',
   currentPinpoint:    null,
@@ -114,7 +114,7 @@ var MapsLib = {
     var marker = new google.maps.Marker({
       map: map,
       position: coordinate,
-      icon: new google.maps.MarkerImage(MapsLib.eventMarkerIcon)
+      icon: new google.maps.MarkerImage('images/labels/' + id +'.png')
     });
     google.maps.event.addListener(marker, 'click', function(event) {
       infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance + '<br><a href="details.html">' +
@@ -157,10 +157,7 @@ var MapsLib = {
   },
   
   clearSelectedEvents: function() {
-    $("#autoshow").css("backgroundColor", "white");
-    $("#jazzfest").css("backgroundColor", "white");
-    $("#magicshow").css("backgroundColor", "white");
-    $("#caraccident").css("backgroundColor", "white");
+    $(".item").css("backgroundColor", "white");
   },
 
   // maintains map centerpoint for responsive design
