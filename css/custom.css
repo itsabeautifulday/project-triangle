@@ -131,6 +131,7 @@ canvas {-ms-touch-action: double-tap-zoom;}
   max-height: 80vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 #current_location {
