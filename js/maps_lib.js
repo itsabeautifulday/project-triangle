@@ -72,7 +72,8 @@ var MapsLib = {
         MapsLib.hideMenus();
         MapsLib.closeAll();
     });    
-    
+	
+    MapsLib.plotGradients();
     //plot points on map
     MapsLib.plotMap(map);
 
@@ -84,13 +85,12 @@ var MapsLib = {
       icon: MapsLib.currLocationIcon,
       title:"You're here"
     });   
-
-    MapsLib.plotGradients();	
   },
 
   setAllMap: function(map){
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
+    for (var i=0;i<gradientArray.length;i++) {
+      gradientArray[i].setMap(map);
+	  markers[i].setMap(map);
     }
   },
   
@@ -104,8 +104,6 @@ var MapsLib = {
   },
 
   plotMap: function(map) {
-    MapsLib.setAllMap(null);
-
     var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, ID, gradient FROM " + MapsLib.fusionTableId;
     query = encodeURIComponent(query);
     var gvizQuery = new google.visualization.Query(
@@ -135,10 +133,12 @@ var MapsLib = {
     var marker = new google.maps.Marker({
       map: map,
       position: coordinate,
-      icon: new google.maps.MarkerImage('images/labels/' + eventname + '.png')
+      icon: new google.maps.MarkerImage('images/labels/' + eventname + '.png'),
+	  title: eventname
     });
 
-    markers.push(marker);
+    markers[gradient - 1] = marker;
+	gradientArray[gradient - 1].setMap(map);
     google.maps.event.addListener(marker, 'click', function(event) {
 	  MapsLib.closeAll();
       infoWindow.setPosition(coordinate);
@@ -282,38 +282,24 @@ var MapsLib = {
     markers.push(marker);     
   },
 
-  search: function(){
+  search: function(){ 
     MapsLib.setAllMap(null);
-
-    var coord = new google.maps.LatLng(49.283958,-123.106306);
-    var infoWindow = new google.maps.InfoWindow();
-    var marker = new google.maps.Marker({
-      map: map,
-      position: coord,
-      icon: 'images/blue-dot.png'
-    });
-    google.maps.event.addListener(marker, 'click', function(event) {
-      infoWindow.setPosition(coord);
-      infoWindow.setContent("VancouverAutoShow" + '<br>Number of people: ' + "122" + '<br>Distance: ' + "650m" 
-        + '<br>' + "<button class='btn btn-default btn-xs'><a href='VancouverAutoShow.html'>details</a></button> ");
-      infoWindow.open(map);
-    });  
-    markers.push(marker);
-
-    var coord2 = new google.maps.LatLng(49.276020,-123.133777);
-    var infoWindow = new google.maps.InfoWindow();
-    var marker = new google.maps.Marker({
-      map: map,
-      position: coord2,
-      icon: 'images/blue-dot.png'
-    });
-    google.maps.event.addListener(marker, 'click', function(event) {
-      infoWindow.setPosition(coord2);
-      infoWindow.setContent("CarAccident" + '<br>Number of people: ' + "20" + '<br>Distance: ' + "800m" 
-        + '<br>' + "<button class='btn btn-default btn-xs'><a href='CarAccident.html'>details</a></button> ");
-      infoWindow.open(map);
-    });  
-    markers.push(marker);     
+	for (var i = 0; i < markers.length; i++) {
+	   var content = markers[i].getTitle().toLowerCase();
+	   var searchTerm = $("#search-field").val();
+	   searchTerm = searchTerm.toLowerCase()
+	   searchTerm = searchTerm.replace(/\s+/g, '');
+	   if (content.indexOf(searchTerm) != -1) {
+	     markers[i].setMap(map);
+		 gradientArray[i].setMap(map);
+	   }
+    }
+  },
+  
+  clearSearch: function() {
+	MapsLib.setAllMap(map);
+	$("#search-field").val("");
+	$("#clear_search").hide();
   },
 
   findMe: function() {
@@ -348,6 +334,9 @@ var MapsLib = {
       classie.toggle( body, 'cbp-spmenu-push-toright' );
       classie.toggle( menuLeft, 'cbp-spmenu-open' );
     }
+	if ($("#search-bar").is(":visible")) {
+      $("#search-bar").slideToggle();
+	}
   },
   // maintains map centerpoint for responsive design
   calculateCenter: function() {
