@@ -343,6 +343,11 @@ var MapsLib = {
     $("#collapseLoc").collapse('hide');
     $("#collapseOne").collapse('hide');
     $("#menu").collapse('hide');
+	if (classie.has( body, 'cbp-spmenu-push-toright' ) && classie.has( menuLeft, 'cbp-spmenu-open' )) {
+	  classie.toggle( showSideMenu, 'active' );
+      classie.toggle( body, 'cbp-spmenu-push-toright' );
+      classie.toggle( menuLeft, 'cbp-spmenu-open' );
+    }
   },
   // maintains map centerpoint for responsive design
   calculateCenter: function() {
