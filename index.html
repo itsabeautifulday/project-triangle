@@ -60,7 +60,6 @@
           <div id="collapseLoc" class="panel-collapse collapse in">
             <ul class="list-group">
               <li class="list-group-item" id="loc_dt"><a>Downtown Vancouver</a></li>
-              <li class="list-group-item" id="loc_coquitlam"><a>Coquitlam</a></li>
               <li class="list-group-item" id="loc_burnaby"><a>Burnaby</a></li>
               <li class="list-group-item" id="loc_surrey"><a>Surrey</a></li>
             </ul>
@@ -123,6 +122,7 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places&v=3.14"></script>
     <script type="text/javascript" src="js/jquery.geocomplete.min.js"></script>
     <script type="text/javascript" src="js/maps_lib.js"></script>
+	<script type="text/javascript" src="js/utility.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script src="js/classie.js"></script>
     <script type='text/javascript'>
@@ -174,13 +174,7 @@
 		  $(collapseLoc).collapse('hide');
 		  MapsLib.locationJump("loc_burnaby");
 		});
-		
-		$("#loc_coquitlam").on("click", function() {
-		  $("#default_loc").text($("#loc_coquitlam").text());
-		  $(collapseLoc).collapse('hide');
-		  MapsLib.locationJump("loc_coquitlam");
-		});
-		
+
 		$("#loc_surrey").on("click", function() {
 		  $("#default_loc").text($("#loc_surrey").text());
 		  $(collapseLoc).collapse('hide');
@@ -189,6 +183,21 @@
 
         $(function() {
           MapsLib.initialize();
+		  
+          var region = GetURLParameter("region");
+          if (region == undefined) {
+			$("#default_loc").text($("#loc_dt").text());
+            region = "downtown"
+            MapsLib.locationJump("loc_dt");
+          }
+          if (region == "surrey") {
+            $("#default_loc").text($("#loc_surrey").text());
+            MapsLib.locationJump("loc_surrey");
+          }
+          if (region == "burnaby") {
+            $("#default_loc").text($("#loc_burnaby").text());
+            MapsLib.locationJump("loc_burnaby");  
+          }
            
           $('#current_location').click(function(){
             MapsLib.findMe();

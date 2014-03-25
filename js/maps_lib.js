@@ -38,7 +38,7 @@ var MapsLib = {
   recordNamePlural:   "results",
 
   searchRadius:       805,            //in meters ~ 1/2 mile
-  defaultZoom:        15,             //zoom level when map is loaded (bigger is more zoomed in)
+  defaultZoom:        14,             //zoom level when map is loaded (bigger is more zoomed in)
   currLocationIcon:   'images/curr-loc.png',
   eventMarkerIcon:    'images/red-dot.png',
   currentPinpoint:    null,
@@ -89,7 +89,6 @@ var MapsLib = {
 
   setAllMap: function(map){
     for (var i=0;i<gradientArray.length;i++) {
-      gradientArray[i].setMap(map);
 	  markers[i].setMap(map);
     }
   },
@@ -104,7 +103,7 @@ var MapsLib = {
   },
 
   plotMap: function(map) {
-    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, ID, gradient FROM " + MapsLib.fusionTableId;
+    var query = "SELECT 'Event Name', 'Number of people', Distance, Coordinates, ID, gradient, RegionID FROM " + MapsLib.fusionTableId;
     query = encodeURIComponent(query);
     var gvizQuery = new google.visualization.Query(
       'http://www.google.com/fusiontables/gvizdata?tq=' + query);
@@ -119,16 +118,17 @@ var MapsLib = {
         var stringCoordinates = response.getDataTable().getValue(i, 3);
         var eventid = response.getDataTable().getValue(i, 4);
 		var gradient = response.getDataTable().getValue(i, 5);
+		var region = response.getDataTable().getValue(i, 6);
         var splitCoordinates = stringCoordinates.split(',');
         var lat = splitCoordinates[0];
         var lng = splitCoordinates[1];
         var coordinate = new google.maps.LatLng(lat, lng);
-        MapsLib.createEventMarker(eventid, eventname, size, distance, coordinate, gradient);
+        MapsLib.createEventMarker(eventid, eventname, size, distance, coordinate, gradient, region);
       }
     });	
   },
   
-  createEventMarker: function(eventid, eventname, size, distance, coordinate, gradient) {
+  createEventMarker: function(eventid, eventname, size, distance, coordinate, gradient, region) {
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       map: map,
@@ -138,12 +138,11 @@ var MapsLib = {
     });
 
     markers[gradient - 1] = marker;
-	gradientArray[gradient - 1].setMap(map);
     google.maps.event.addListener(marker, 'click', function(event) {
 	  MapsLib.closeAll();
       infoWindow.setPosition(coordinate);
       infoWindow.setContent(eventname + '<br>Number of people: ' + size + '<br>Distance: ' + distance 
-        + '<br>' + "<button class='btn btn-default btn-xs'><a href='eventdetails.html?event="+eventid+"'>Details</a></button> ");
+        + '<br>' + "<button class='btn btn-default btn-xs'><a href='eventdetails.html?event="+eventid+"&region="+region+"'>Details</a></button> ");
       infoWindow.open(map);
       gradientArray[gradient - 1].setMap(map);
     });
@@ -312,13 +311,10 @@ var MapsLib = {
 	if (location == "loc_dt") {
 		loc_coord = MapsLib.vancouver_coord;
 	} 
-	if (location =="loc_burnaby") {
+	else if (location == "loc_burnaby") {
 		loc_coord = MapsLib.burnaby_coord;
 	}
-	if (location == "loc_coquitlam") {
-		loc_coord = MapsLib.coquitlam_coord;
-	}
-	if (location == "loc_surrey") {
+	else if (location == "loc_surrey") {
 		loc_coord = MapsLib.surrey_coord;
 	}
 	map.panTo(loc_coord);
