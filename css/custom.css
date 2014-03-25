@@ -1,8 +1,14 @@
 a { color: #4B58A6; }
 a:hover { color: #4B58A6; }
 
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
 body {
   overflow: hidden;
+  height: 100%;
   background: white;
 }
 ::-webkit-scrollbar {
@@ -11,6 +17,8 @@ body {
 
 .frame {
   overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100%;
   z-index: 100;
 }
 
@@ -131,6 +139,8 @@ canvas {-ms-touch-action: double-tap-zoom;}
   height: 100vh;
   width: 100%;
   background-color: #ffffff;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 100px;
 }
 
 #event_list_dt, #event_list_coquitlam, #event_list_surrey {
