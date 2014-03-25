@@ -50,6 +50,12 @@ body {
   padding-right:10px;
 }
 
+.list-container{
+  width: 100vw;
+  height: 35vh;
+  overflow: scroll;
+}
+
 #map_canvas img {
   max-width: none;
   position: absolute;
