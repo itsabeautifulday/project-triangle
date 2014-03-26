@@ -320,6 +320,7 @@ var MapsLib = {
     }
 	if ($("#search-bar").is(":visible")) {
       $("#search-bar").slideToggle();
+	  $('input').blur();
 	}
   },
   // maintains map centerpoint for responsive design

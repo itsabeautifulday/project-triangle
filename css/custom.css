@@ -126,13 +126,13 @@ canvas {-ms-touch-action: double-tap-zoom;}
 #current_location {
   position: absolute;
   z-index: 10000;
-  bottom: 50px;
+  bottom: 10px;
 }
 
 #clear_search {
   position: absolute;
   z-index: 10000;
-  bottom: 50px;
+  bottom: 10px;
   right: 0px;
   display: none;
 }
